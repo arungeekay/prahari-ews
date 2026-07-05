@@ -1,4 +1,4 @@
-"""Retail features for DISHA — capacity (from the monthly series) and intent (from engagement).
+"""Retail features for DISHA - capacity (from the monthly series) and intent (from engagement).
 
 Capacity reconstructs true disposable income from behavioural cash-flow; engagement turns raw
 sessions into an intent signal. Both are point-in-time over the retail window.

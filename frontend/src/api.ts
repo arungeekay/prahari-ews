@@ -9,7 +9,7 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${BASE}${path}`, init)
   if (!res.ok) {
     const body = await res.text().catch(() => '')
-    throw new Error(`API ${res.status} ${res.statusText} on ${path}${body ? ` — ${body}` : ''}`)
+    throw new Error(`API ${res.status} ${res.statusText} on ${path}${body ? ` - ${body}` : ''}`)
   }
   return (await res.json()) as T
 }

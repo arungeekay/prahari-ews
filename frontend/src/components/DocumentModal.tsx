@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Spinner } from './ui'
 
 /**
- * Document modal with a subtle progressive "typing" reveal — the signature
- * demo moment (brief §"Document generation"). Header reads "Draft — for
+ * Document modal with a subtle progressive "typing" reveal - the signature
+ * demo moment (brief §"Document generation"). Header reads "Draft - for
  * officer review". The officer-review disclaimer itself comes from the API text.
  */
 export function DocumentModal({
@@ -59,7 +59,7 @@ export function DocumentModal({
               <div>
                 <div className="inline-flex items-center gap-2 text-[11px] font-semibold text-teal uppercase tracking-wide">
                   <span className="w-1.5 h-1.5 rounded-full bg-teal" />
-                  Draft — for officer review
+                  Draft - for officer review
                 </div>
                 <h3 className="text-ink font-semibold text-lg mt-1">{title}</h3>
                 {subtitle && <p className="text-muted text-xs mt-0.5">{subtitle}</p>}

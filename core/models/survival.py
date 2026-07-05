@@ -2,7 +2,7 @@
 
 Uses a gradient-boosted-survival-style approach via a monthly-hazard derived from the PD model
 where lifelines is unavailable, and a lifelines Cox PH fit when it is. Output: runway months,
-clamped 0–24 (display "24+" as green). Robust by design — the demo must never break on an
+clamped 0–24 (display "24+" as green). Robust by design - the demo must never break on an
 optional dependency.
 """
 
@@ -75,7 +75,7 @@ class RunwayModel:
         return float(np.clip(1.0 / max(monthly_h, 1e-4), 0, MAX_RUNWAY))
 
     def runway_batch(self, feat_df: pd.DataFrame, pd_values: np.ndarray) -> np.ndarray:
-        """Vectorised runway for many accounts (portfolio view) — PD-hazard × Cox partial-hazard."""
+        """Vectorised runway for many accounts (portfolio view) - PD-hazard × Cox partial-hazard."""
         pv = np.clip(np.asarray(pd_values, dtype=float), 1e-4, 0.999)
         monthly_h = 1 - (1 - pv) ** (1 / 12)
         return np.clip(1.0 / np.maximum(monthly_h, 1e-4), 0, MAX_RUNWAY)

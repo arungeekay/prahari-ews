@@ -3,7 +3,7 @@
 Classifies income type from credit patterns, reconstructs monthly income (incl. volatile gig
 income), detects obligations, computes true disposable income = income − obligations − essential
 spend, a discipline score from the retained-balance rhythm, and a serviceable EMI (≤ 50% of
-disposable). Rule-based and transparent — every number is auditable for RM review.
+disposable). Rule-based and transparent - every number is auditable for RM review.
 """
 
 from __future__ import annotations

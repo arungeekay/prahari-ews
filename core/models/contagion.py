@@ -1,4 +1,4 @@
-"""Contagion model (BUILD_SPEC §4.2) — the demo's signature reveal.
+"""Contagion model (BUILD_SPEC §4.2) - the demo's signature reveal.
 
 Directed anchor→supplier payment graph. Stress diffusion (auditable, documented math):
 

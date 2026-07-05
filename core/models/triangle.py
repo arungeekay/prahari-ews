@@ -41,7 +41,7 @@ def _side(name: str, corroborant: str, gst_g: float, other_g: float, hypothesis_
     hyp = None
     if not consistent:
         hyp = (f"Declared GST turnover grew {gst_g:+.0%} while {corroborant} moved {other_g:+.0%} "
-               f"— a {abs(divergence):.0%} gap, consistent with {hypothesis_kind}.")
+               f"- a {abs(divergence):.0%} gap, consistent with {hypothesis_kind}.")
     return dict(pair=name, corroborant=corroborant, consistency=round(consistency, 1),
                 verdict="consistent" if consistent else "anomaly",
                 gst_growth=round(gst_g, 3), corroborant_growth=round(other_g, 3),

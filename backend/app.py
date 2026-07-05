@@ -1,4 +1,4 @@
-"""PRAHARI backend (BUILD_SPEC §5.1) — Track 4 default-prediction early-warning system.
+"""PRAHARI backend (BUILD_SPEC §5.1) - Track 4 default-prediction early-warning system.
 
 All numbers are computed live from the synthetic portfolio + trained models; nothing is
 hardcoded. Documents are generated via the provider-agnostic LLM layer (templates by default).

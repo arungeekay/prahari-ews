@@ -45,7 +45,7 @@ def _assign_trajectory_timing(rng, trajectory):
 def _severity(rng, trajectory):
     """Per-firm drift severity (heterogeneity so defaulters don't all look identical).
 
-    Survivors (distress_then_recover) drift MILDLY — they overlap distress in the moderate zone
+    Survivors (distress_then_recover) drift MILDLY - they overlap distress in the moderate zone
     (keeping AUC honest) but rarely hit the extremes, so a genuinely severe distress firm like
     Sharma stays distinguishable (short runway)."""
     if trajectory == "distress_at_month_k":
@@ -77,7 +77,7 @@ def _make_random_borrower(rng, idx):
     state = C.MSME_CITY_TO_STATE[city]
     vintage = int(clip(rng.normal(9, 5), 1, 30))
     loan_type = weighted_choice(rng, C.LOAN_TYPES, C.LOAN_TYPE_WEIGHTS)
-    # sanctioned limit — log-uniform between ₹10L and ₹5Cr so small firms dominate
+    # sanctioned limit - log-uniform between ₹10L and ₹5Cr so small firms dominate
     lo, hi = np.log(C.LIMIT_MIN), np.log(C.LIMIT_MAX)
     limit = float(np.exp(rng.uniform(lo, hi)))
     limit = round(limit / 1_00_000) * 1_00_000          # round to nearest ₹1 lakh
@@ -132,7 +132,7 @@ def _make_demo_borrower(rng, idx, spec):
         loan_start_month=loan_start_idx,
         loan_start_date=month_index_to_date(loan_start_idx).isoformat(),
         health_trajectory=traj, traj_start=traj_start, drift_len=drift, default_month=default_month,
-        severity=1.0,   # demo cast is pinned — no severity jitter (keeps Sharma's beats exact)
+        severity=1.0,   # demo cast is pinned - no severity jitter (keeps Sharma's beats exact)
         months_available=months_avail,
         base_turnover=base_turnover,
         bank_credit_share=0.82,

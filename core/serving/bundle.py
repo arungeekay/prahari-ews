@@ -2,7 +2,7 @@
 serving tables (PRAHARI portfolio, DISHA leads). Built once on backend boot.
 
 Boot flow (BUILD_SPEC §8.3): if parquet artifacts are missing they are generated; if model
-artifacts are missing they are trained — all deterministic from the seed, so cold start is
+artifacts are missing they are trained - all deterministic from the seed, so cold start is
 reproducible and self-contained.
 """
 
@@ -62,7 +62,7 @@ class Bundle:
             self.contagion()
         elif product == "DISHA":
             self.leads()
-        # AROGYA scores on-demand per applicant — nothing to warm.
+        # AROGYA scores on-demand per applicant - nothing to warm.
 
     # ------------------------------------------------------------------ MSME group access
     def msme_group(self, borrower_id: str) -> pd.DataFrame | None:
@@ -166,7 +166,7 @@ class Bundle:
                 capacity_band=cap_band, income_type=cap["income_type"],
                 reconstructed_income=cap["reconstructed_income"], disposable_income=cap["disposable_income"],
                 discipline_score=cap["discipline_score"],
-                matched_product=best["label"] if best else "—",
+                matched_product=best["label"] if best else "-",
                 ticket_size=best["ticket_size"] if best else 0,
                 conversion_probability=round(float(conv), 4),
                 demo=c.demo,

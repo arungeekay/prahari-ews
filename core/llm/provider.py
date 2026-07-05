@@ -1,7 +1,7 @@
 """Narrative generation: Anthropic API when configured, deterministic Jinja2 templates otherwise.
 
 The template path is the default and is what the demo runs on with zero API keys. The LLM path
-is a thin enhancement that, on any error, silently falls back to the template — the demo must
+is a thin enhancement that, on any error, silently falls back to the template - the demo must
 never break because of a missing/expired key.
 """
 
@@ -14,7 +14,7 @@ from jinja2 import Environment, StrictUndefined, Undefined
 
 from .templates import TEMPLATES
 
-DISCLAIMER_TMPL = "Draft prepared by {product} AI. For officer review — not a final decision."
+DISCLAIMER_TMPL = "Draft prepared by {product} AI. For officer review - not a final decision."
 
 
 def _inr(x) -> str:
@@ -95,4 +95,4 @@ def generate(narrative_type: str, context: dict, product: str = "PRAHARI") -> st
     if body is None:
         body = template_text
     disclaimer = DISCLAIMER_TMPL.format(product=product)
-    return f"{body}\n\n— {disclaimer}"
+    return f"{body}\n\n- {disclaimer}"

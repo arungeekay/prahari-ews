@@ -10,7 +10,7 @@ import { Contagion } from './screens/Contagion'
 import { AgentRun } from './screens/AgentRun'
 import { ModelCard } from './screens/ModelCard'
 
-const DEMO_ACCOUNT = 'MSME00001' // Sharma Fabricators — scripted demo (BUILD_SPEC §9.1)
+const DEMO_ACCOUNT = 'MSME00001' // Sharma Fabricators - scripted demo (BUILD_SPEC §9.1)
 
 const NAV: { key: Screen; label: string; icon: string }[] = [
   { key: 'portfolio', label: 'Portfolio Heat Map', icon: '▦' },

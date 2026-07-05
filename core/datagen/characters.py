@@ -1,4 +1,4 @@
-"""Named demo characters (BUILD_SPEC §9) — the storylines that must render exactly.
+"""Named demo characters (BUILD_SPEC §9) - the storylines that must render exactly.
 
 These are placed *first* in their respective tables with fixed ids and attributes, then the
 random pool fills the rest. Their behavioural series are crafted deterministically by
@@ -18,7 +18,7 @@ from . import config as C
 # `demo` is the stable tag the series generator keys on.
 # --------------------------------------------------------------------------------------
 DEMO_MSMES = [
-    # Sharma Fabricators — slow-distress, runway ≈7mo at demo (BUILD_SPEC §9.1).
+    # Sharma Fabricators - slow-distress, runway ≈7mo at demo (BUILD_SPEC §9.1).
     # distress_start=16 → storyline month 3 = idx 19 (GST delays), month 5 = idx 21
     # (credits −22%, util >85%), month 7 = idx 23 (first cheque return). default ≈ idx 30.
     dict(
@@ -28,7 +28,7 @@ DEMO_MSMES = [
         promoter_age=52, promoter_experience_years=24, promoter_qualification="HSC",
         trajectory="distress_at_month_k", distress_start=16, drift_len=14,
     ),
-    # Verma Textiles — clean twin; consistent GST/electricity/EPFO → ~712 REFER (AROGYA).
+    # Verma Textiles - clean twin; consistent GST/electricity/EPFO → ~712 REFER (AROGYA).
     dict(
         demo="verma", name="Verma Textiles", sector="manufacturing",
         city="Surat", state="Gujarat", vintage_years=8,
@@ -36,7 +36,7 @@ DEMO_MSMES = [
         promoter_age=45, promoter_experience_years=17, promoter_qualification="Graduate",
         trajectory="growing",
     ),
-    # Gupta Trading Co — fraud twin; identical declared GST to Verma, electricity/EPFO decoupled.
+    # Gupta Trading Co - fraud twin; identical declared GST to Verma, electricity/EPFO decoupled.
     dict(
         demo="gupta", name="Gupta Trading Co", sector="trading",
         city="Rajkot", state="Gujarat", vintage_years=7,
@@ -44,7 +44,7 @@ DEMO_MSMES = [
         promoter_age=41, promoter_experience_years=14, promoter_qualification="Graduate",
         trajectory="fraud_pattern",
     ),
-    # Nisha Snacks — thin file: only 5 months of history (BUILD_SPEC §9.2 / §6.3).
+    # Nisha Snacks - thin file: only 5 months of history (BUILD_SPEC §9.2 / §6.3).
     dict(
         demo="nisha", name="Nisha Snacks", sector="food_processing",
         city="Coimbatore", state="Tamil Nadu", vintage_years=1,
@@ -58,7 +58,7 @@ DEMO_MSMES = [
 TWIN_BASE_TURNOVER = 42_00_000     # ₹42 lakh/month
 TWIN_GST_GROWTH_PER_MONTH = 0.020  # +2%/month declared turnover (both twins, identical series)
 
-# Anchor #1 — Bharat Auto Components Ltd (the contagion source, BUILD_SPEC §9.1).
+# Anchor #1 - Bharat Auto Components Ltd (the contagion source, BUILD_SPEC §9.1).
 ANCHOR1 = dict(anchor_id="ANCH1", name="Bharat Auto Components Ltd", sector="manufacturing")
 OTHER_ANCHOR_NAMES = [
     "Deccan Industrial Supplies Ltd",
@@ -70,7 +70,7 @@ OTHER_ANCHOR_NAMES = [
 # Retail demo cast (DISHA). Placed as the first customers.
 # --------------------------------------------------------------------------------------
 DEMO_RETAIL = [
-    # Ravi Kumar — gig worker; volatile UPI income ≈₹31k, disposable ≈₹14k, intent HOT,
+    # Ravi Kumar - gig worker; volatile UPI income ≈₹31k, disposable ≈₹14k, intent HOT,
     # clicked personal-loan page but capacity matches consumer-durable (BUILD_SPEC §9.3).
     dict(
         # base_income set so the *reconstructed* (volatility-discounted) monthly income lands
@@ -80,7 +80,7 @@ DEMO_RETAIL = [
         loan_intent="serious", capacity_score=0.55,
         clicked_page="personal_loan", existing_products=["savings", "upi"],
     ),
-    # Discipline twins — same ₹60k salary, opposite day-of-month balance curves.
+    # Discipline twins - same ₹60k salary, opposite day-of-month balance curves.
     dict(
         demo="discipline_saver", name="Kavya Iyer", age=33, city="Pune", state="Maharashtra",
         occupation_type="salaried", income_band="mid", base_income=60_000,

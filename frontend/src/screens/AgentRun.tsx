@@ -90,7 +90,7 @@ export function AgentRun() {
               {done && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
                   <Card className="p-5">
-                    <SectionTitle sub="Shortest-runway red accounts — action these first.">
+                    <SectionTitle sub="Shortest-runway red accounts - action these first.">
                       Watch-list ({result.watchlist.length})
                     </SectionTitle>
                     <div className="overflow-x-auto">
@@ -127,7 +127,7 @@ export function AgentRun() {
                   </Card>
 
                   <Card className="p-5">
-                    <SectionTitle sub="Auto-drafted — for officer review.">Portfolio early-warning commentary</SectionTitle>
+                    <SectionTitle sub="Auto-drafted - for officer review.">Portfolio early-warning commentary</SectionTitle>
                     <pre className="whitespace-pre-wrap font-sans text-[13px] leading-relaxed text-slate-700">{result.commentary}</pre>
                   </Card>
                 </motion.div>

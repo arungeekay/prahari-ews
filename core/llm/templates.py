@@ -1,4 +1,4 @@
-"""Deterministic Jinja2 templates — the keyless fallback for every narrative type.
+"""Deterministic Jinja2 templates - the keyless fallback for every narrative type.
 
 These must read naturally: they are what evaluators see when no API key is set. Banker
 vocabulary throughout (RBI SMA ladder, IRAC, CRILC, RAG). Amounts are formatted in ₹ lakh/crore
@@ -20,11 +20,11 @@ Key beats:
 {% for beat in beats %}  - Month {{ beat.month }}: {{ beat.text }}
 {% endfor %}
 On current trajectory the model projects an expected runway of about {{ runway_months }} months \
-before the account crosses into 90+ DPD. Acting now — while conduct is still clean — preserves \
+before the account crosses into 90+ DPD. Acting now - while conduct is still clean - preserves \
 roughly {{ inr(provision_saved) }} of provisioning versus acting at NPA.""",
 
     "sma_memo": """\
-SPECIAL MENTION ACCOUNT — EARLY WARNING MEMO
+SPECIAL MENTION ACCOUNT - EARLY WARNING MEMO
 Account: {{ name }}  |  Borrower ID: {{ borrower_id }}  |  Facility: {{ loan_type }} {{ inr(sanctioned_limit) }}
 Branch review as of {{ as_of_label }}  |  Current classification: {{ sma_stage | default('SMA-1') }} ({{ bucket }})
 
@@ -54,7 +54,7 @@ Central Repository of Information on Large Credits framework, this status is to 
 the stipulated timeline. Behavioural drivers are detailed in the associated early-warning memo.""",
 
     "portfolio_commentary": """\
-PORTFOLIO EARLY-WARNING COMMENTARY — {{ as_of_label }}
+PORTFOLIO EARLY-WARNING COMMENTARY - {{ as_of_label }}
 Monitored book: {{ n_accounts }} MSME accounts, {{ inr(total_exposure) }} exposure.
 
 Red bucket: {{ n_red }} accounts ({{ inr(red_exposure) }}). Amber: {{ n_amber }}. \
@@ -85,12 +85,12 @@ Assessment: {{ assessment }}
     "triangle_hypothesis": """\
 {% if consistent %}The {{ pair }} cross-check is consistent ({{ consistency }}/100): declared \
 turnover moves in step with {{ corroborant }}. No anomaly.{% else %}The {{ pair }} cross-check is \
-broken ({{ consistency }}/100). {{ detail }} — a pattern consistent with {{ hypothesis }}. \
+broken ({{ consistency }}/100). {{ detail }} - a pattern consistent with {{ hypothesis }}. \
 Recommend physical verification before any sanction.{% endif %}""",
 
     "prescription": """\
 DATA-COMPLETENESS PRESCRIPTION
-Applicant: {{ name }}. Current confidence: {{ (confidence * 100) | round(0) }}% ({{ bucket }} — \
+Applicant: {{ name }}. Current confidence: {{ (confidence * 100) | round(0) }}% ({{ bucket }} - \
 driven by a thin file, not by adverse signals).
 
 To lift confidence:
@@ -106,7 +106,7 @@ Subject: A loan option matched to how you actually earn
 Hi {{ first_name }},
 
 Based on your banking relationship with us, you may be a strong fit for a \
-{{ product }} of up to {{ inr(ticket_size) }} at an indicative EMI of {{ inr(emi) }}/month — \
+{{ product }} of up to {{ inr(ticket_size) }} at an indicative EMI of {{ inr(emi) }}/month - \
 comfortably within your assessed repayment capacity.
 
 {{ personalisation }}
@@ -124,5 +124,5 @@ Effort was spread evenly across the base.
 
 Redirecting the same RM effort to the top {{ top_tier_n }} behaviourally-ranked leads \
 (HOT + capacity-qualified) is projected to convert at ~{{ predicted_rate }}%, or about \
-{{ projected_conversions }} conversions — a {{ uplift_x }}x improvement — for the same call volume.""",
+{{ projected_conversions }} conversions - a {{ uplift_x }}x improvement - for the same call volume.""",
 }

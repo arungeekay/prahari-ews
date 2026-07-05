@@ -1,6 +1,6 @@
 """DISHA product matcher (BUILD_SPEC §4.2): rule-based match to home / auto / consumer-durable /
 personal loans, with eligibility band and serviceable ticket size (EMI ≤ 50% of disposable at
-product rates). Transparent rules — the RM sees exactly why a product was matched.
+product rates). Transparent rules - the RM sees exactly why a product was matched.
 """
 
 from __future__ import annotations
@@ -40,7 +40,7 @@ def match_products(capacity: dict, customer_row=None) -> dict:
             eligible = False; reasons.append("discipline score below unsecured-lending bar")
         if key == "home_loan" and discipline < 30:
             eligible = False; reasons.append("discipline score below long-tenure bar")
-        # long-tenure secured loans need stable income — not a volatile gig profile with low buffer
+        # long-tenure secured loans need stable income - not a volatile gig profile with low buffer
         if key == "auto_loan" and income_type == "gig_worker" and discipline < 60:
             eligible = False; reasons.append("60-month tenure not advised for volatile gig income")
 

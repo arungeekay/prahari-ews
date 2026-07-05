@@ -167,7 +167,7 @@ function ProvisionImpact({ portfolio }: { portfolio: PortfolioT }) {
   return (
     <Card className="p-5">
       <SectionTitle sub="Provisioning on the red bucket if we intervene now vs. let it slide to NPA.">
-        Provision impact — act now vs. at NPA
+        Provision impact - act now vs. at NPA
       </SectionTitle>
       <div className="rounded-xl bg-rag-green/5 border border-rag-green/20 p-4 text-center mb-4">
         <div className="text-[11px] uppercase tracking-wide text-muted">Preserved by acting now</div>

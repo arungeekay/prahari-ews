@@ -1,4 +1,4 @@
-"""MSME monthly behavioural series (24 months) — causally consistent with latent trajectory.
+"""MSME monthly behavioural series (24 months) - causally consistent with latent trajectory.
 
 The cascade for a *predictably* distressing account (BUILD_SPEC §3.2/§3.3/§9.1):
     GST filing delays (d≥3) → utilisation creep (d≥1, 62%→94%) → credit-turnover decline
@@ -6,10 +6,10 @@ The cascade for a *predictably* distressing account (BUILD_SPEC §3.2/§3.3/§9.
     months before 90+ DPD.  (d = month_index − onset)
 
 But a realistic book is NOT that tidy (otherwise a model scores AUC ≈ 0.99 and reads as rigged):
-    * sudden_shock          — healthy, then an abrupt default with NO precursor (unpredictable).
-    * distress_then_recover — genuine 4–6 month drift that recovers (honest false positives).
-    * per-firm `severity`   — defaulters drift at different steepness (some barely detectable).
-    * clean-majority noise  — stray one-off bounces / late filings / lumpy months.
+    * sudden_shock          - healthy, then an abrupt default with NO precursor (unpredictable).
+    * distress_then_recover - genuine 4–6 month drift that recovers (honest false positives).
+    * per-firm `severity`   - defaulters drift at different steepness (some barely detectable).
+    * clean-majority noise  - stray one-off bounces / late filings / lumpy months.
 
 Key invariants preserved throughout:
     * No feature leakage: field at month m depends only on the trajectory up to m.
@@ -31,7 +31,7 @@ _MONTHS = np.arange(_M)
 _MONTH_DATES = [month_index_to_date(i).isoformat() for i in range(_M)]
 
 # distress_at_month_k (defaults) and distress_then_recover (keeps paying) share the SAME soft
-# cascade — utilisation, credit, GST, bounces, EPFO, bureau DPD — driven by onset + severity.
+# cascade - utilisation, credit, GST, bounces, EPFO, bureau DPD - driven by onset + severity.
 # They diverge ONLY in the terminal repayment outcome. This is the deliberate aleatoric overlap:
 # point-in-time before the terminal DPD ramp, a defaulter and a survivor are indistinguishable, so
 # no feature set can perfectly separate them and AUC honestly caps ~0.92.
@@ -226,7 +226,7 @@ def _gst_filing_delay(rng, row) -> np.ndarray:
 
 
 def _repayment(row) -> tuple[list, np.ndarray, np.ndarray]:
-    """repayment_status list, emi_days_late, dpd — driven by months-to-default.
+    """repayment_status list, emi_days_late, dpd - driven by months-to-default.
 
     Non-defaulting firms are on_time, EXCEPT a near-miss (distress_then_recover) posts a single
     delayed EMI at its trough (a soft signal that then cures)."""
@@ -235,7 +235,7 @@ def _repayment(row) -> tuple[list, np.ndarray, np.ndarray]:
     status, emi_late, dpd = [], np.zeros(_M, np.int64), np.zeros(_M, np.int64)
 
     if dm < 0:
-        # Non-defaulters keep servicing our EMI. distress_then_recover pays throughout (DPD 0) —
+        # Non-defaulters keep servicing our EMI. distress_then_recover pays throughout (DPD 0) -
         # identical to a distress firm BEFORE its terminal ramp, which is the whole point (the
         # observable overlap that makes default genuinely uncertain point-in-time). slow_decline
         # posts a couple of delayed-but-cured EMIs (mild chronic stress).
@@ -348,7 +348,7 @@ def _gen_borrower(rng: np.random.Generator, row, sent_lookup: dict) -> dict:
     else:
         emp_trend = op
     employees = np.maximum(2, np.round(emp0 * emp_trend * (1 + rng.normal(0, 0.03, _M)))).astype(np.int64)
-    # EPFO contribution timeliness worsens under stress — but stressed SURVIVORS (near-miss /
+    # EPFO contribution timeliness worsens under stress - but stressed SURVIVORS (near-miss /
     # slow_decline) and even healthy firms delay too, so this is a noisy risk indicator, NOT a
     # distress-only label proxy (that would be quasi-leakage and inflate AUC).
     emp_delay = np.zeros(_M, np.int64)

@@ -1,4 +1,4 @@
-"""IDBI Innovate 2026 — shared behavioural-intelligence engine.
+"""IDBI Innovate 2026 - shared behavioural-intelligence engine.
 
 Sub-packages:
     datagen   synthetic Bharat data generator (Phase 1)

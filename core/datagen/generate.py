@@ -14,7 +14,7 @@ from .entities import build_borrowers, build_anchors_and_edges, build_customers
 from .msme_series import build_msme_monthly
 from .retail_series import build_retail
 
-# Stable output order — also the order tables are written and checksummed.
+# Stable output order - also the order tables are written and checksummed.
 TABLES = [
     "borrowers", "anchors", "edges", "msme_monthly", "sector_sentiment",
     "customers", "retail_monthly", "retail_engagement",
@@ -24,7 +24,7 @@ TABLES = [
 def generate(seed: int = C.SEED_DEFAULT) -> dict:
     """Generate all tables. Returns {table_name: DataFrame} in stable TABLES order."""
     root = np.random.default_rng(seed)
-    # ordered sub-streams — DO NOT reorder (determinism depends on it)
+    # ordered sub-streams - DO NOT reorder (determinism depends on it)
     s_borrowers, s_anchors, s_msme, s_customers, s_retail = root.spawn(5)
 
     borrowers = build_borrowers(s_borrowers)

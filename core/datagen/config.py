@@ -2,14 +2,14 @@
 
 Everything that shapes the economy lives here so the demo storylines can be tuned in one
 place. All values are chosen to be *causally consistent* (BUILD_SPEC §3.2) and to hit the
-acceptance targets in §3.5. No wall-clock time or unseeded randomness anywhere — determinism
+acceptance targets in §3.5. No wall-clock time or unseeded randomness anywhere - determinism
 (§3.5) depends on it.
 """
 
 from __future__ import annotations
 
 # --------------------------------------------------------------------------------------
-# Time window — 24 months, July 2024 → June 2026 (BUILD_SPEC §3.1)
+# Time window - 24 months, July 2024 → June 2026 (BUILD_SPEC §3.1)
 # --------------------------------------------------------------------------------------
 START_YEAR = 2024
 START_MONTH = 7            # July 2024  == month_index 0
@@ -48,7 +48,7 @@ SECTOR_PROFILE = {
 }
 
 # --------------------------------------------------------------------------------------
-# Geography — weighted to real MSME clusters (BUILD_SPEC §3.1)
+# Geography - weighted to real MSME clusters (BUILD_SPEC §3.1)
 # --------------------------------------------------------------------------------------
 # Explicit ordered lists keep sampling deterministic and independent of dict iteration order.
 MSME_CITIES = ["Ludhiana", "Surat", "Coimbatore", "Rajkot", "Pune", "Ahmedabad", "Tirupur", "Jaipur"]
@@ -67,7 +67,7 @@ RETAIL_CITY_TO_STATE = {
 }
 
 # --------------------------------------------------------------------------------------
-# Loan parameters (BUILD_SPEC §3.1)  — amounts in ₹ (rupees)
+# Loan parameters (BUILD_SPEC §3.1)  - amounts in ₹ (rupees)
 # --------------------------------------------------------------------------------------
 LOAN_TYPES = ["CC", "OD", "term"]
 LOAN_TYPE_WEIGHTS = [0.45, 0.25, 0.30]
@@ -89,18 +89,18 @@ PROMOTER_QUAL_WEIGHTS = [0.08, 0.18, 0.22, 0.34, 0.12, 0.06]
 #   month 23; the rest are still deteriorating (the red/amber watch-list, e.g. Sharma).
 # --------------------------------------------------------------------------------------
 # Realism note (why this isn't a toy): a world where *every* defaulter drifts predictably for a
-# year yields AUC ≈ 0.99 — implausible to any evaluator (real 12-month PD models live ~0.75–0.85).
+# year yields AUC ≈ 0.99 - implausible to any evaluator (real 12-month PD models live ~0.75–0.85).
 # So the population deliberately includes UNPREDICTABLE defaulters (sudden_shock) and honest
 # false positives (distress_then_recover), and per-firm severity varies. Target: temporal-split
-# AUC ~0.91–0.94, balanced accuracy just over 0.90 — meeting the bank's ≥0.90 bar the honest way.
+# AUC ~0.91–0.94, balanced accuracy just over 0.90 - meeting the bank's ≥0.90 bar the honest way.
 TRAJECTORIES = ["stable", "growing", "slow_decline", "distress_at_month_k",
                 "sudden_shock", "distress_then_recover", "fraud_pattern"]
 TRAJECTORY_WEIGHTS = [0.487, 0.20, 0.12, 0.055, 0.013, 0.085, 0.04]   # sums to 1.0
 
 # Per-firm heterogeneity in how hard a distressing account drifts. Low-severity distress firms
-# drift gently (harder to catch) — not all defaulters look alike.
+# drift gently (harder to catch) - not all defaulters look alike.
 DISTRESS_SEVERITY_RANGE = (0.55, 1.30)
-# Survivors drift mildly — overlap distress only in the moderate zone (keeps AUC honest) while
+# Survivors drift mildly - overlap distress only in the moderate zone (keeps AUC honest) while
 # leaving genuinely severe distress (e.g. Sharma) distinguishable for a short runway.
 RECOVER_SEVERITY_RANGE = (0.35, 0.85)
 
@@ -119,7 +119,7 @@ FIRM_GST_BASE_DELAY_RANGE = (3, 11)   # their habitual delay (days)
 # Distress cascade timing (months). Behavioural drift begins 10–14 months before default (§3.3).
 DISTRESS_START_RANGE = (2, 16)     # month_index at which the slow-distress storyline begins
 # Months from onset to 90+ DPD default. A WIDE spread is what makes the world honest: long-drift
-# firms (like Sharma, ~14) are catchable a year out — the product's headline — while short-fuse
+# firms (like Sharma, ~14) are catchable a year out - the product's headline - while short-fuse
 # firms (~6) only reveal themselves ~4–6 months ahead and are genuine far-horizon misses. This
 # spread, not tidy uniformity, is what lands AUC in a plausible ~0.92 band (spec "~10–14 months"
 # is the *upper* cluster; real books also carry shorter fuses).
@@ -139,8 +139,8 @@ DISTRESS = dict(
     repay_break_months=3,    # repayment turns delayed/missed only this many months pre-default
 )
 
-# slow_decline: mild, bounded deterioration that stabilises — the "amber survivor" hard negatives.
-# slow_decline: chronically stressed firms that limp along for years and DON'T default — the
+# slow_decline: mild, bounded deterioration that stabilises - the "amber survivor" hard negatives.
+# slow_decline: chronically stressed firms that limp along for years and DON'T default - the
 # big, safe reservoir of honest false positives (they look risky point-in-time but survive).
 SLOW_DECLINE = dict(
     start_range=(4, 14),
@@ -156,7 +156,7 @@ GROWING = dict(turnover_growth=(0.010, 0.030), util_base=0.45)
 STABLE = dict(util_base=0.50)
 
 # sudden_shock: healthy until a shock (fire / partner dispute / key-customer loss) then abrupt
-# default with NO behavioural precursor — the unpredictable ~15–20% of defaulters.
+# default with NO behavioural precursor - the unpredictable ~15–20% of defaulters.
 SHOCK = dict(
     start_range=(8, 22),        # month the shock lands
     dpd_ramp_months=3,          # 0→90 DPD over 3 months after the shock (default = start+3)
@@ -165,17 +165,17 @@ SHOCK = dict(
 )
 
 # distress_then_recover: genuine 4–6 month distress drift (util creep, GST delays, credit dip)
-# that then RECOVERS — the honest false positives that keep precision realistic.
-# distress_then_recover: a "stressed survivor" — genuine deterioration (utilisation high, GST
+# that then RECOVERS - the honest false positives that keep precision realistic.
+# distress_then_recover: a "stressed survivor" - genuine deterioration (utilisation high, GST
 # delays, depressed credit turnover) that then PLATEAUS at a stressed level and rides it out
 # without ever defaulting (SMA-2 that never becomes NPA). The soft signals mirror a distress
-# firm mid-drift, but with no DPD escalation — so point-in-time it is genuinely indistinguishable
+# firm mid-drift, but with no DPD escalation - so point-in-time it is genuinely indistinguishable
 # from a firm heading to default. This aleatoric overlap is what honestly caps AUC ~0.92.
 # distress_then_recover: a chronic decliner that keeps SERVICING its EMI and does not default in
 # the window. It SHARES the distress soft cascade (utilisation, credit, GST, bounces, EPFO,
-# bureau DPD — see msme_series._SOFT_DISTRESS) driven by onset + severity, differing ONLY in the
+# bureau DPD - see msme_series._SOFT_DISTRESS) driven by onset + severity, differing ONLY in the
 # terminal repayment outcome (DPD never ramps to 90). So a far-from-default distress firm and one
-# of these are indistinguishable point-in-time — the deliberate overlap that caps AUC ~0.94.
+# of these are indistinguishable point-in-time - the deliberate overlap that caps AUC ~0.94.
 RECOVER = dict(start_range=(3, 12))   # onset of the shared soft decline
 
 # Noise on the clean majority so stable/growing firms aren't implausibly pristine.
@@ -188,7 +188,7 @@ CLEAN_NOISE = dict(
 )
 
 # --------------------------------------------------------------------------------------
-# Contagion event (BUILD_SPEC §3.3 / §9.1) — the scripted demo reveal
+# Contagion event (BUILD_SPEC §3.3 / §9.1) - the scripted demo reveal
 # --------------------------------------------------------------------------------------
 CONTAGION = dict(
     event_month=16,             # Anchor #1 slows payments at month 16
@@ -202,7 +202,7 @@ CONTAGION = dict(
 )
 
 # --------------------------------------------------------------------------------------
-# Fraud pattern (BUILD_SPEC §3.3) — GST grows while electricity/EPFO stay flat or fall.
+# Fraud pattern (BUILD_SPEC §3.3) - GST grows while electricity/EPFO stay flat or fall.
 # --------------------------------------------------------------------------------------
 FRAUD = dict(
     gst_growth_per_month=(0.020, 0.040),   # declared turnover balloons
@@ -212,12 +212,12 @@ FRAUD = dict(
 )
 
 # --------------------------------------------------------------------------------------
-# Sector news/sentiment (BUILD_SPEC §3.2) — score in [-1, 1] per sector-month.
+# Sector news/sentiment (BUILD_SPEC §3.2) - score in [-1, 1] per sector-month.
 # --------------------------------------------------------------------------------------
 SENTIMENT = dict(base=(-0.1, 0.35), month_vol=0.12)
 
 # --------------------------------------------------------------------------------------
-# Retail (DISHA) — occupations and intent (BUILD_SPEC §3.1 / §3.4)
+# Retail (DISHA) - occupations and intent (BUILD_SPEC §3.1 / §3.4)
 # --------------------------------------------------------------------------------------
 OCCUPATIONS = ["salaried", "self_employed", "gig_worker"]
 OCCUPATION_WEIGHTS = [0.52, 0.28, 0.20]

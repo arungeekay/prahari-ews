@@ -77,12 +77,12 @@ export function ModelCard() {
         </div>
       </div>
 
-      {/* Cost of error — the money argument for high recall */}
+      {/* Cost of error - the money argument for high recall */}
       {mc.cost_of_error && <CostOfErrorPanel c={mc.cost_of_error} />}
 
       {/* Features */}
       <Card className="p-5">
-        <SectionTitle sub={`${mc.features.length} point-in-time behavioural features — no data after the as-of month (leakage-tested).`}>
+        <SectionTitle sub={`${mc.features.length} point-in-time behavioural features - no data after the as-of month (leakage-tested).`}>
           Model features
         </SectionTitle>
         <div className="flex flex-wrap gap-1.5">
@@ -98,7 +98,7 @@ export function ModelCard() {
 function CostOfErrorPanel({ c }: { c: CostOfError }) {
   return (
     <Card className="p-5">
-      <SectionTitle sub="Why modest precision with high recall is the correct, honest operating point — priced in rupees.">
+      <SectionTitle sub="Why modest precision with high recall is the correct, honest operating point - priced in rupees.">
         Cost of error (in rupees)
       </SectionTitle>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
@@ -116,7 +116,7 @@ function CostOfErrorPanel({ c }: { c: CostOfError }) {
         {/* Asymmetry + error economics table */}
         <div className="lg:col-span-2">
           <div className="rounded-xl bg-rag-red/[0.04] border border-rag-red/20 p-3.5 mb-3 text-sm text-slate-700">
-            A missed default costs <b style={{ color: RAG.red }}>~{c.asymmetry_ratio}×</b> a false alarm — so the
+            A missed default costs <b style={{ color: RAG.red }}>~{c.asymmetry_ratio}×</b> a false alarm - so the
             model is tuned to catch stress (<b>{c.caught}</b> of <b>{c.defaults_in_validation}</b> defaults), accepting
             more alerts for officer review.
           </div>

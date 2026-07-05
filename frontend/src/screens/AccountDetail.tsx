@@ -220,8 +220,8 @@ function Delta({ label, before, after, good }: { label: string; before: string; 
 
 function Storyline({ storyline, beats }: { storyline: string; beats: Beat[] }) {
   // Drop the trailing disclaimer + "Key beats" block from the prose (beats are shown as a timeline).
-  const prose = storyline.split('Key beats:')[0].split('— Draft prepared')[0].trim()
-  const tail = storyline.includes('— Draft prepared') ? '— Draft prepared' + storyline.split('— Draft prepared')[1] : ''
+  const prose = storyline.split('Key beats:')[0].split('- Draft prepared')[0].trim()
+  const tail = storyline.includes('- Draft prepared') ? '- Draft prepared' + storyline.split('- Draft prepared')[1] : ''
   return (
     <Card className="p-5">
       <SectionTitle sub="How the account drifted from green to its current bucket.">Deterioration storyline</SectionTitle>
@@ -280,7 +280,7 @@ function SeriesChart({ d }: { d: Detail }) {
   }))
   return (
     <Card className="p-5">
-      <SectionTitle sub="Sales inflows falling while limit utilisation creeps up — the classic stress signature.">
+      <SectionTitle sub="Sales inflows falling while limit utilisation creeps up - the classic stress signature.">
         Monthly credits vs. limit utilisation
       </SectionTitle>
       <div style={{ width: '100%', height: 280 }}>

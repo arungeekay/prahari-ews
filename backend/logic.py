@@ -63,9 +63,9 @@ def whatif(action: str, exposure: float, runway: float, pd_value: float) -> dict
 def cost_of_error(confusion_matrix, avg_exposure: float) -> dict:
     """Translate the model's confusion matrix into rupees (BUILD_SPEC §5.2 cost-of-error table).
 
-    A false negative (missed default) is catastrophic — provisioning jumps 0.4% → 15% on the
+    A false negative (missed default) is catastrophic - provisioning jumps 0.4% → 15% on the
     exposure once it hits NPA. A false positive (false alarm) costs only one officer review. This
-    ~2,900:1 asymmetry is WHY the model is tuned for recall, not precision — and why a modest
+    ~2,900:1 asymmetry is WHY the model is tuned for recall, not precision - and why a modest
     precision is the correct, honest operating point, not a weakness."""
     cm = confusion_matrix
     (tn, fp), (fn, tp) = cm[0], cm[1]
@@ -95,7 +95,7 @@ def compliance_clocks(exposure: float, runway: float, bucket: str) -> list[dict]
     if bucket == "red":
         if exposure >= CRILC_EXPOSURE_THRESHOLD:
             clocks.append(dict(name="CRILC reporting", window_days=7, days_remaining=7,
-                               detail="Aggregate exposure ≥ ₹5 Cr in the red bucket — CRILC report due."))
+                               detail="Aggregate exposure ≥ ₹5 Cr in the red bucket - CRILC report due."))
         clocks.append(dict(name="Projected NPA (90+ DPD)", window_days=int(round(runway * 30)),
                            days_remaining=int(round(runway * 30)),
                            detail="Model-projected time until 90+ DPD on current trajectory."))

@@ -1,4 +1,4 @@
-"""Retail behavioural series (12 months) + digital-engagement events — for DISHA.
+"""Retail behavioural series (12 months) + digital-engagement events - for DISHA.
 
 Income shapes by occupation (BUILD_SPEC §3.4): salaried = fixed monthly credit; gig = 20–40
 volatile UPI credits/month; self-employed = lumpy business credits. Spending discipline shows

@@ -2,7 +2,7 @@
 
 /** Format rupees into lakh/crore, e.g. ₹4.12 Cr, ₹85.0 L. */
 export function inr(v: number | null | undefined): string {
-  if (v == null || Number.isNaN(v)) return '—'
+  if (v == null || Number.isNaN(v)) return '-'
   const abs = Math.abs(v)
   if (abs >= 1e7) return `₹${(v / 1e7).toFixed(2)} Cr`
   if (abs >= 1e5) return `₹${(v / 1e5).toFixed(1)} L`
@@ -18,7 +18,7 @@ export const inrCr = (v: number): string => `₹${toCr(v).toFixed(v >= 1e9 ? 0 :
 
 /** Percentage from a 0..1 fraction. */
 export function pct(x: number | null | undefined, digits = 1): string {
-  if (x == null || Number.isNaN(x)) return '—'
+  if (x == null || Number.isNaN(x)) return '-'
   return `${(x * 100).toFixed(digits)}%`
 }
 

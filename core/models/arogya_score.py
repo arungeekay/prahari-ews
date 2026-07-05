@@ -1,6 +1,6 @@
 """AROGYA health score (BUILD_SPEC §4.2/§6): five pillars → unified 0–1000 → GO/REFER/NO-GO.
 
-Plus a data-coverage CONFIDENCE (0–1). A thin file gets low confidence and is REFERred — never an
+Plus a data-coverage CONFIDENCE (0–1). A thin file gets low confidence and is REFERred - never an
 automatic NO-GO purely for missing data (§6.3, enforced here).
 """
 
@@ -41,29 +41,29 @@ def score_arogya(borrower_row, monthly: pd.DataFrame, config: dict | None = None
     bal = m.month_end_balance.to_numpy()
     elec = m.electricity_units.to_numpy()
 
-    # 1. Turnover Pulse — growth + stability
+    # 1. Turnover Pulse - growth + stability
     t_growth = np.clip(_growth(turnover), -0.4, 0.4)
     t_cv = turnover.std() / (turnover.mean() + 1)
     turnover_pulse = _clip100(52 + 70 * t_growth - 22 * t_cv)
 
-    # 2. Cash-flow Discipline — retained balance, low bounces, stable credits
+    # 2. Cash-flow Discipline - retained balance, low bounces, stable credits
     retained = np.mean(bal / (credits + 1))
     bounces = float(m.cheque_bounces_outward.sum() + m.cheque_bounces_inward.sum())
     c_cv = credits.std() / (credits.mean() + 1)
     cashflow = _clip100(30 + 150 * retained - 7 * bounces - 16 * c_cv)
 
-    # 3. Compliance Hygiene — GST filing timeliness + repayment conduct
+    # 3. Compliance Hygiene - GST filing timeliness + repayment conduct
     gst_delay = m.gst_filing_delay_days.mean()
     delayed = float((m.repayment_status == "delayed").sum())
     missed = float((m.repayment_status == "missed").sum())
     compliance = _clip100(82 - 2.4 * gst_delay - 9 * delayed - 22 * missed)
 
-    # 4. Operational Intensity — do real operations (electricity) move with declared turnover?
+    # 4. Operational Intensity - do real operations (electricity) move with declared turnover?
     e_growth = _growth(elec)
     divergence = abs(t_growth - e_growth)
     operational = _clip100(80 - 70 * divergence)
 
-    # 5. Promoter Profile — vintage, experience, qualification
+    # 5. Promoter Profile - vintage, experience, qualification
     promoter = _clip100(20 + 1.8 * float(borrower_row.vintage_years)
                         + 1.1 * float(borrower_row.promoter_experience_years)
                         + _QUAL_BONUS.get(str(borrower_row.promoter_qualification), 8))
@@ -81,7 +81,7 @@ def score_arogya(borrower_row, monthly: pd.DataFrame, config: dict | None = None
     confidence = float(np.clip(0.50 + 0.50 * coverage, 0.30, 0.97))
 
     bucket = "GO" if unified >= GO_CUTOFF else ("REFER" if unified >= REFER_CUTOFF else "NO-GO")
-    # §6.3: a thin file is REFERred for corroboration — never an automatic GO or NO-GO on coverage
+    # §6.3: a thin file is REFERred for corroboration - never an automatic GO or NO-GO on coverage
     thin_file = confidence < CONFIDENCE_REFER_FLOOR
     if thin_file and bucket in ("GO", "NO-GO"):
         bucket = "REFER"

@@ -121,7 +121,7 @@ class PDModel:
                 "headline is AUC and balanced accuracy, NOT raw accuracy on an imbalanced target. "
                 "AUC intentionally sits in a plausible ~0.94 band; a near-perfect score would "
                 "indicate leakage or an unrealistically tidy dataset. Precision is modest by design "
-                "— an early-warning system prioritises recall (catching stress) at a manageable "
+                "- an early-warning system prioritises recall (catching stress) at a manageable "
                 "alert volume; every flag carries reason codes for officer review."
             ),
         )
