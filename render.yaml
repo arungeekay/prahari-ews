@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: prahari-ews
+    env: docker
+    plan: free
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false # Render will prompt you for this value in the dashboard
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: PORT
+        value: 8001
