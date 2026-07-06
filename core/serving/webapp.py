@@ -19,7 +19,13 @@ def create_app(title: str, product: str, frontend_dir: str | None = None) -> Fas
 
     @app.get("/api/health")
     def health():
-        return {"status": "ok", "product": product}
+        # llm = "active" when a real LLM (Anthropic key) is wired; "template" = deterministic fallback
+        try:
+            from ..llm import using_llm
+            llm = "active" if using_llm() else "template"
+        except Exception:
+            llm = "template"
+        return {"status": "ok", "product": product, "llm": llm}
 
     return app
 
