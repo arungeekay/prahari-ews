@@ -10,5 +10,10 @@
       "source": "/(.*)",
       "destination": "/$1"
     }
-  ]
+  ],
+  "functions": {
+    "api/**/*.py": {
+      "excludeFiles": "frontend/**"
+    }
+  }
 }
