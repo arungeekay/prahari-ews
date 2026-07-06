@@ -15,6 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY core/ ./core/
 COPY backend/ ./backend/
 COPY scripts/ ./scripts/
+COPY data/ ./data/
 COPY --from=frontend /fe/dist ./frontend/dist
 COPY start.sh .
 RUN chmod +x start.sh
