@@ -19,10 +19,10 @@ def create_app(title: str, product: str, frontend_dir: str | None = None) -> Fas
 
     @app.get("/api/health")
     def health():
-        # llm = "active" when a real LLM (Anthropic key) is wired; "template" = deterministic fallback
+        # llm reports the live narrative backend: 'openai', 'anthropic', or 'template' (fallback)
         try:
-            from ..llm import using_llm
-            llm = "active" if using_llm() else "template"
+            from ..llm import active_provider
+            llm = active_provider()
         except Exception:
             llm = "template"
         return {"status": "ok", "product": product, "llm": llm}

@@ -7,6 +7,6 @@ generated document ends with the officer-review disclaimer.
 
 from __future__ import annotations
 
-from .provider import generate, available_narratives, using_llm, DISCLAIMER_TMPL
+from .provider import generate, available_narratives, using_llm, active_provider, DISCLAIMER_TMPL
 
-__all__ = ["generate", "available_narratives", "using_llm", "DISCLAIMER_TMPL"]
+__all__ = ["generate", "available_narratives", "using_llm", "active_provider", "DISCLAIMER_TMPL"]

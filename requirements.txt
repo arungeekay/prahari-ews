@@ -10,3 +10,4 @@ shap>=0.44
 fastapi>=0.110
 uvicorn[standard]>=0.29
 anthropic>=0.40
+openai>=1.40
