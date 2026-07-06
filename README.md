@@ -85,7 +85,7 @@ Set `ANTHROPIC_API_KEY` (see `.env.example`) to enable LLM-authored documents.
 RBI SMA-0/1/2 ladder, IRAC provisioning (standard 0.4% / sub-standard 15%), CRILC reporting, EWS Master Directions. Human-in-the-loop: every document is a draft for officer review.
 
 ## Team & contact
-**The U-Team** - IDBI Innovate 2026 submission. Contact: [arungkind@gmail.com](mailto:arungkind@gmail.com).
+**The U-Team** - IDBI Innovate 2026 submission. Contact: [arungkind@gmail.com](mailto:arungkind@gmail.com), shriramkv@gmail.com, girimercury97@gmail.com, vrsuba@gmail.com**
 
 ---
 _Every AI-generated document in this app ends with: "Draft prepared by PRAHARI AI. For officer review - not a final decision."_
