@@ -4,7 +4,7 @@
 
 ![PRAHARI](docs/screenshots/prahari-portfolio.png)
 
-**Built for IDBI Innovate 2026 - Track 4: Default Prediction (Early Warning System).**
+**Built for IDBI Innovate 2026 - Track 4: Default Prediction (Early Warning System) By the U-Team**
 
 Runs entirely on **synthetic data we generate** (deterministic, `--seed 42`). External data
 sources are **mock APIs** designed to swap for the IDBI sandbox endpoints in phase 2.
