@@ -42,7 +42,7 @@ def available_narratives() -> list[str]:
 
 
 def using_llm() -> bool:
-    return bool(os.environ.get("ANTHROPIC_API_KEY"))
+    return bool(os.environ.get("OPENAI_API_KEY"))
 
 
 def _render_template(narrative_type: str, context: dict) -> str:
@@ -52,35 +52,33 @@ def _render_template(narrative_type: str, context: dict) -> str:
 
 
 def _try_llm(narrative_type: str, context: dict, template_text: str) -> str | None:
-    """Best-effort Anthropic polish of the template draft. Returns None on any failure."""
+    """Best-effort OpenAI polish of the template draft. Returns None on any failure."""
     try:
-        import anthropic
+        import openai
     except ImportError:
         return None
     try:
-        client = anthropic.Anthropic()
-        model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5")
+        client = openai.OpenAI()
+        model = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")
         system = (
             "You are a credit-risk writing assistant for an Indian bank (IDBI). Rewrite the DRAFT "
             "into a crisp, professional banker's note. Use RBI vocabulary (SMA-0/1/2, IRAC, CRILC, "
             "RAG) where appropriate. Keep every number exactly as given. Do not invent facts. "
             "Return only the note text, no preamble."
         )
-        msg = client.messages.create(
+        msg = client.chat.completions.create(
             model=model,
             max_tokens=900,
-            system=system,
-            messages=[{
-                "role": "user",
-                "content": (
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": (
                     f"Narrative type: {narrative_type}\n"
                     f"Context (JSON): {json.dumps(context, default=str)}\n\n"
                     f"DRAFT:\n{template_text}"
-                ),
-            }],
+                )}
+            ],
         )
-        parts = [b.text for b in msg.content if getattr(b, "type", None) == "text"]
-        out = "\n".join(parts).strip()
+        out = msg.choices[0].message.content.strip() if msg.choices else None
         return out or None
     except Exception:
         return None

@@ -1,0 +1,45 @@
+{
+  "checksums": {
+    "anchors": "8c8cd7ab500982610ad29161f0d6d872",
+    "borrowers": "601535b312beb1040e232b36be388b22",
+    "customers": "755771db9e00f8e5c876802add4f032e",
+    "edges": "ab8173852e7dbf8e46d4f0e514597717",
+    "msme_monthly": "8a2d95cc9c3258456ae7ae727116b181",
+    "retail_engagement": "559303730d4598797f8836f07c3cd1f1",
+    "retail_monthly": "a18ff4c4632f849c5a77851801b51615",
+    "sector_sentiment": "4b2405eb3572d0850451d7c600492dc4"
+  },
+  "seed": 42,
+  "summary": {
+    "anchor1_suppliers": 14,
+    "contagion_induced": 5,
+    "engagement_events": 6546,
+    "msme_monthly_rows": 69392,
+    "n_borrowers": 3000,
+    "n_customers": 10000,
+    "n_ever_defaulters": 224,
+    "n_observed_defaults": 162,
+    "observed_default_rate": 0.054,
+    "retail_monthly_rows": 120000,
+    "sudden_shock_share_of_defaulters": 0.165,
+    "trajectory_counts": {
+      "distress_at_month_k": 187,
+      "distress_then_recover": 272,
+      "fraud_pattern": 131,
+      "growing": 597,
+      "slow_decline": 322,
+      "stable": 1454,
+      "sudden_shock": 37
+    }
+  },
+  "tables": [
+    "borrowers",
+    "anchors",
+    "edges",
+    "msme_monthly",
+    "sector_sentiment",
+    "customers",
+    "retail_monthly",
+    "retail_engagement"
+  ]
+}

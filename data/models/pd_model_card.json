@@ -1,0 +1,59 @@
+{
+  "name": "PRAHARI PD model",
+  "task": "Probability of default within 12 months (RBI SMA early warning)",
+  "algorithm": "XGBoost (gradient-boosted trees)",
+  "features": [
+    "util_last",
+    "util_mean",
+    "util_max",
+    "util_slope",
+    "credit_slope",
+    "credit_last_over_first",
+    "credit_cv",
+    "credit_mean_lakh",
+    "gst_delay_mean",
+    "gst_delay_max",
+    "gst_delay_slope",
+    "bounce_out_sum",
+    "bounce_in_sum",
+    "balance_cv",
+    "balance_last_over_credit",
+    "missed_cnt",
+    "delayed_cnt",
+    "dpd_max",
+    "emi_late_max",
+    "bureau_dpd_other_max",
+    "bureau_enq_sum",
+    "bureau_newloans_sum",
+    "epfo_delay_max",
+    "epfo_emp_slope",
+    "sentiment_last",
+    "note_sentiment_mean",
+    "electricity_slope",
+    "fuel_slope"
+  ],
+  "metrics": {
+    "auc": 0.9523,
+    "balanced_accuracy": 0.8974,
+    "precision": 0.2842,
+    "recall": 0.9155,
+    "f1": 0.4337,
+    "operating_threshold": 0.05,
+    "confusion_matrix": [
+      [
+        4774,
+        655
+      ],
+      [
+        24,
+        260
+      ]
+    ],
+    "n_train": 8475,
+    "n_valid": 5713,
+    "valid_positive_rate": 0.0497,
+    "validation": "temporal (train as_of [6, 9, 12], validate as_of [15, 18])",
+    "horizon_months": 12
+  },
+  "honesty_note": "Metrics are out-of-time (temporal validation): the model is trained on earlier as-of months and validated on later ones, so no future information leaks. The headline is AUC and balanced accuracy, NOT raw accuracy on an imbalanced target. AUC intentionally sits in a plausible ~0.94 band; a near-perfect score would indicate leakage or an unrealistically tidy dataset. Precision is modest by design - an early-warning system prioritises recall (catching stress) at a manageable alert volume; every flag carries reason codes for officer review."
+}

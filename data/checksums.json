@@ -1,0 +1,42 @@
+{
+  "anchors": {
+    "content_hash": "66ea50de16893e456299b3ca7c4c3c69",
+    "md5": "8c8cd7ab500982610ad29161f0d6d872",
+    "rows": 4
+  },
+  "borrowers": {
+    "content_hash": "85f5697b1abd3fffbfd112623e4d9526",
+    "md5": "601535b312beb1040e232b36be388b22",
+    "rows": 3000
+  },
+  "customers": {
+    "content_hash": "24c64c4083641eabd52f184f2db867b0",
+    "md5": "755771db9e00f8e5c876802add4f032e",
+    "rows": 10000
+  },
+  "edges": {
+    "content_hash": "727c6a077c8c145adadfe2eaf177a863",
+    "md5": "ab8173852e7dbf8e46d4f0e514597717",
+    "rows": 55
+  },
+  "msme_monthly": {
+    "content_hash": "829fdff519dd77d5860b1fcaff4949a8",
+    "md5": "8a2d95cc9c3258456ae7ae727116b181",
+    "rows": 69392
+  },
+  "retail_engagement": {
+    "content_hash": "f9bce817cc8f87332c74a38539a89a35",
+    "md5": "559303730d4598797f8836f07c3cd1f1",
+    "rows": 6546
+  },
+  "retail_monthly": {
+    "content_hash": "28d7b1d708d9f7930deefdfc4077ab47",
+    "md5": "a18ff4c4632f849c5a77851801b51615",
+    "rows": 120000
+  },
+  "sector_sentiment": {
+    "content_hash": "a951944045649866faa3a9d005923951",
+    "md5": "4b2405eb3572d0850451d7c600492dc4",
+    "rows": 120
+  }
+}

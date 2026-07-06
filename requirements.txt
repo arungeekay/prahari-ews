@@ -9,3 +9,4 @@ lifelines>=0.28
 shap>=0.44
 fastapi>=0.110
 uvicorn[standard]>=0.29
+openai>=1.30.0

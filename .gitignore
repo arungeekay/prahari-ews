@@ -4,8 +4,8 @@ __pycache__/
 venv/
 node_modules/
 frontend/dist/
-data/
-*.parquet
-*.db
+# data/
+# *.parquet
+# *.db
 .env
 .DS_Store
