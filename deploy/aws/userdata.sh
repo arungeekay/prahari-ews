@@ -33,6 +33,7 @@ systemctl enable --now docker
 # ---- app -----------------------------------------------------------------------------------------
 mkdir -p "$APP_DIR" && cd "$APP_DIR"
 if [ ! -d repo ]; then git clone --depth 1 --branch "$BRANCH" "$REPO" repo; fi
+git config --global --add safe.directory /opt/prahari/repo 2>/dev/null || true   # lets later "sudo git" redeploys read the root-owned clone
 
 PUBLIC_IP=$(curl -fsS --max-time 5 http://checkip.amazonaws.com | tr -d '\n' || true)
 HOST="${PRAHARI_HOST:-$(echo "$PUBLIC_IP" | tr . -).sslip.io}"

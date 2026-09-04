@@ -64,13 +64,21 @@ cd /opt/prahari
 docker compose ps                      # both containers healthy
 docker compose logs -f prahari         # application log
 cat /var/log/prahari-url.txt           # the URL the script derived
-# redeploy after pushing new code to GitHub:
-cd repo && git pull && cd .. && docker compose build && docker compose up -d
+# redeploy after pushing new code to GitHub (reset, not pull: survives a rewritten branch):
+sudo git config --global --add safe.directory /opt/prahari/repo   # once per box
+cd repo && sudo git fetch origin refined && sudo git reset --hard origin/refined && cd .. && sudo docker compose build && sudo docker compose up -d
 ```
 
 Optional environment variables (add under `environment:` in `/opt/prahari/docker-compose.yml`):
 `ANTHROPIC_API_KEY` or `OPENAI_API_KEY` for LLM-polished documents; `DATA_SOURCE=idbi_sandbox`
 with `IDBI_BASE_URL` and `IDBI_API_KEY` if the bank ever exposes its catalogue.
+
+### Keys and state files
+`deploy/aws/*.pem` (the instance SSH key), `.ec2-state-*` and `.userdata.lf.sh` are gitignored and
+excluded by `scripts/publish.py`. If a key ever reaches a public repository, treat it as
+compromised: install a new key on the instance (replace `~/.ssh/authorized_keys`), delete the EC2
+key pair, and rewrite the branch. This happened once on 4 September 2026 and was handled that way
+within minutes; the key that served the instance was rotated and the leaked one no longer works.
 
 ## Cost control
 
