@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: prahari-ews
+    env: docker
+    plan: starter          # always-on; the free plan sleeps and cold starts badly for a live demo
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: "8001"
+      - key: DATA_SOURCE
+        value: synthetic
+      - key: ANTHROPIC_API_KEY
+        sync: false

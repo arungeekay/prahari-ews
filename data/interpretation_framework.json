@@ -1,0 +1,57 @@
+{
+  "version": "2026-09-03",
+  "description": "PRAHARI common interpretation framework. One configuration drives every screen and every API: calibrated PD to a unified Risk Grade, RAG bucket, model-implied SMA-equivalent, IRAC provisioning and a recommended action ladder. Identical scale, colours and words for every MSME loan regardless of type or sector; per-loan-type band overrides are permitted here and nowhere else.",
+  "grade_bands": [
+    {"grade": "PR1", "label": "Minimal",     "pd_max": 0.010, "score_max": 1000},
+    {"grade": "PR2", "label": "Low",         "pd_max": 0.025, "score_max": 900},
+    {"grade": "PR3", "label": "Moderate",    "pd_max": 0.050, "score_max": 800},
+    {"grade": "PR4", "label": "Watch",       "pd_max": 0.100, "score_max": 650},
+    {"grade": "PR5", "label": "Elevated",    "pd_max": 0.200, "score_max": 500},
+    {"grade": "PR6", "label": "High",        "pd_max": 0.400, "score_max": 350},
+    {"grade": "PR7", "label": "Severe",      "pd_max": 1.001, "score_max": 200}
+  ],
+  "rag": {
+    "amber_pd": 0.050,
+    "red_pd": 0.200,
+    "rationale": "Calibrated PD means these bands read as odds a banker can check: amber from a 1-in-20 twelve-month default probability, red from 1-in-5. The amber threshold coincides with the bank-90-percent-accuracy operating point on the validation fold.",
+    "per_loan_type": {}
+  },
+  "model_implied_sma": {
+    "green": "Standard (no model flag)",
+    "amber": "SMA-0 equivalent (behavioural)",
+    "red":   "SMA-1/2 equivalent (behavioural)",
+    "note": "Statutory SMA is defined by RBI on days past due (SMA-0: 1-30, SMA-1: 31-60, SMA-2: 61-90). PRAHARI's flag is a MODEL-IMPLIED equivalent derived from behaviour and is always shown beside the statutory status computed from actual DPD. It never replaces it."
+  },
+  "statutory_sma": [
+    {"label": "Standard", "dpd_min": 0,  "dpd_max": 0},
+    {"label": "SMA-0",    "dpd_min": 1,  "dpd_max": 30},
+    {"label": "SMA-1",    "dpd_min": 31, "dpd_max": 60},
+    {"label": "SMA-2",    "dpd_min": 61, "dpd_max": 90},
+    {"label": "NPA",      "dpd_min": 91, "dpd_max": 100000}
+  ],
+  "irac_provisioning": {
+    "standard": 0.004,
+    "restructured_standard": 0.05,
+    "sub_standard": 0.15,
+    "note": "Standard asset 0.40 percent; sub-standard (NPA up to 12 months) 15 percent; restructured standard 5 percent. Provisioning shown on screen is the difference between acting now (standard) and letting the account slip to sub-standard."
+  },
+  "crilc": {
+    "aggregate_exposure_threshold": 50000000,
+    "note": "CRILC reporting applies to borrowers with aggregate exposure of 5 crore and above. PRAHARI drafts an early-warning note for such accounts; the statutory SMA-2 report itself is triggered by DPD."
+  },
+  "runway_colours": {"green_min_months": 18, "amber_min_months": 9},
+  "actions": [
+    {"bucket": "green", "action": "Routine monitoring", "detail": "Annual review cycle; no action required."},
+    {"bucket": "amber", "action": "Enhanced monitoring", "detail": "Obtain latest stock and book-debt statements; verify drawing power; fortnightly conduct review; officer call on the promoter."},
+    {"bucket": "red",   "action": "Intervene now", "detail": "Unit visit within 15 days; review limits and security; evaluate restructure or reschedule while the account is still standard; draft SMA memo for the credit committee."}
+  ],
+  "pillars": {
+    "Conduct":          {"description": "Utilisation and drawing-power discipline, repayment record, cheque returns, liens, stock-statement submission (IDBI APIs 402, 441, 362, 393)"},
+    "Compliance":       {"description": "GST filing timeliness and EPFO remittance discipline"},
+    "Activity":         {"description": "Real operations: credit turnover, electricity, fuel, headcount trends"},
+    "External":         {"description": "Bureau behaviour with other lenders and sector sentiment (IDBI API 408)"},
+    "Promoter profile": {"description": "Loan type, sector, size, vintage, promoter experience and qualification, the dimensions IDBI named for a unified score"},
+    "Officer notes":    {"description": "Unstructured: sentiment and risk themes extracted from free-text officer observations"},
+    "Contagion":        {"description": "Anchor-attributable inflow dependence and trend (statement credits grouped by payer)"}
+  }
+}

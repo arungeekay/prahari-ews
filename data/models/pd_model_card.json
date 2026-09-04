@@ -1,0 +1,1967 @@
+{
+  "name": "PRAHARI PD model",
+  "task": "Probability of default within 12 months (RBI SMA early warning)",
+  "algorithm": "XGBoost (gradient-boosted trees) with isotonic probability calibration",
+  "features": [
+    "util_last",
+    "util_mean",
+    "util_max",
+    "util_slope",
+    "dp_gap_last",
+    "dp_gap_slope",
+    "drawn_over_dp_last",
+    "over_dp_months",
+    "stmt_missed_cnt",
+    "lien_cnt_sum",
+    "lien_amt_over_limit",
+    "bounce_out_sum",
+    "bounce_in_sum",
+    "balance_cv",
+    "balance_last_over_credit",
+    "missed_cnt",
+    "delayed_cnt",
+    "dpd_max",
+    "emi_late_max",
+    "gst_delay_mean",
+    "gst_delay_max",
+    "gst_delay_slope",
+    "epfo_delay_max",
+    "credit_slope",
+    "credit_last_over_first",
+    "credit_cv",
+    "credit_mean_lakh",
+    "electricity_slope",
+    "fuel_slope",
+    "epfo_emp_slope",
+    "bureau_dpd_other_max",
+    "bureau_enq_sum",
+    "bureau_newloans_sum",
+    "sentiment_last",
+    "is_cc",
+    "is_od",
+    "is_term",
+    "sector_manufacturing",
+    "sector_trading",
+    "sector_logistics",
+    "sector_services",
+    "sector_food_processing",
+    "log_limit",
+    "vintage_years",
+    "promoter_experience_years",
+    "promoter_qual_ord",
+    "note_sent_ewma",
+    "note_sent_min",
+    "note_adverse_cnt",
+    "note_n",
+    "note_severity_max",
+    "note_theme_receivables",
+    "note_theme_labour",
+    "note_theme_demand",
+    "note_theme_input_cost",
+    "note_theme_promoter",
+    "note_theme_legal",
+    "note_theme_stock",
+    "note_theme_capacity",
+    "anchor_inflow_slope",
+    "anchor_dependence"
+  ],
+  "pillars": {
+    "Conduct": [
+      "util_last",
+      "util_mean",
+      "util_max",
+      "util_slope",
+      "dp_gap_last",
+      "dp_gap_slope",
+      "drawn_over_dp_last",
+      "over_dp_months",
+      "stmt_missed_cnt",
+      "lien_cnt_sum",
+      "lien_amt_over_limit",
+      "bounce_out_sum",
+      "bounce_in_sum",
+      "balance_cv",
+      "balance_last_over_credit",
+      "missed_cnt",
+      "delayed_cnt",
+      "dpd_max",
+      "emi_late_max"
+    ],
+    "Compliance": [
+      "gst_delay_mean",
+      "gst_delay_max",
+      "gst_delay_slope",
+      "epfo_delay_max"
+    ],
+    "Activity": [
+      "credit_slope",
+      "credit_last_over_first",
+      "credit_cv",
+      "credit_mean_lakh",
+      "electricity_slope",
+      "fuel_slope",
+      "epfo_emp_slope"
+    ],
+    "External": [
+      "bureau_dpd_other_max",
+      "bureau_enq_sum",
+      "bureau_newloans_sum",
+      "sentiment_last"
+    ],
+    "Promoter profile": [
+      "is_cc",
+      "is_od",
+      "is_term",
+      "sector_manufacturing",
+      "sector_trading",
+      "sector_logistics",
+      "sector_services",
+      "sector_food_processing",
+      "log_limit",
+      "vintage_years",
+      "promoter_experience_years",
+      "promoter_qual_ord"
+    ],
+    "Officer notes": [
+      "note_sent_ewma",
+      "note_sent_min",
+      "note_adverse_cnt",
+      "note_n",
+      "note_severity_max",
+      "note_theme_receivables",
+      "note_theme_labour",
+      "note_theme_demand",
+      "note_theme_input_cost",
+      "note_theme_promoter",
+      "note_theme_legal",
+      "note_theme_stock",
+      "note_theme_capacity"
+    ],
+    "Contagion": [
+      "anchor_inflow_slope",
+      "anchor_dependence"
+    ]
+  },
+  "metrics": {
+    "auc": 0.9615,
+    "auc_raw": 0.9615,
+    "auc_ci95": {
+      "low": 0.9392,
+      "high": 0.9794,
+      "n_boot": 300
+    },
+    "ks": 0.8192,
+    "operating_threshold": 0.058,
+    "accuracy": 0.9022,
+    "balanced_accuracy": 0.9077,
+    "precision": 0.3419,
+    "recall": 0.9138,
+    "f1": 0.4977,
+    "confusion_matrix": [
+      [
+        934,
+        102
+      ],
+      [
+        5,
+        53
+      ]
+    ],
+    "alerts": 155,
+    "alert_rate": 0.1417,
+    "max_capture": {
+      "threshold": 0.048,
+      "accuracy": 0.8812,
+      "balanced_accuracy": 0.8966,
+      "recall": 0.9138,
+      "precision": 0.2978,
+      "f1": 0.4492,
+      "alerts": 178,
+      "alert_rate": 0.1627,
+      "missed": 5,
+      "confusion_matrix": [
+        [
+          911,
+          125
+        ],
+        [
+          5,
+          53
+        ]
+      ]
+    },
+    "thresholds": {
+      "max_capture": 0.048,
+      "bank_90_accuracy": 0.058,
+      "precision_weighted": 0.303
+    },
+    "operating_points": [
+      {
+        "threshold": 0.048,
+        "accuracy": 0.8812,
+        "balanced_accuracy": 0.8966,
+        "recall": 0.9138,
+        "precision": 0.2978,
+        "f1": 0.4492,
+        "alerts": 178,
+        "alert_rate": 0.1627,
+        "missed": 5,
+        "confusion_matrix": [
+          [
+            911,
+            125
+          ],
+          [
+            5,
+            53
+          ]
+        ],
+        "key": "max_capture",
+        "label": "Maximum capture"
+      },
+      {
+        "threshold": 0.058,
+        "accuracy": 0.9022,
+        "balanced_accuracy": 0.9077,
+        "recall": 0.9138,
+        "precision": 0.3419,
+        "f1": 0.4977,
+        "alerts": 155,
+        "alert_rate": 0.1417,
+        "missed": 5,
+        "confusion_matrix": [
+          [
+            934,
+            102
+          ],
+          [
+            5,
+            53
+          ]
+        ],
+        "key": "bank_90_accuracy",
+        "label": "Bank 90% accuracy"
+      },
+      {
+        "threshold": 0.303,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.8246,
+        "recall": 0.6724,
+        "precision": 0.619,
+        "f1": 0.6446,
+        "alerts": 63,
+        "alert_rate": 0.0576,
+        "missed": 19,
+        "confusion_matrix": [
+          [
+            1012,
+            24
+          ],
+          [
+            19,
+            39
+          ]
+        ],
+        "key": "precision_weighted",
+        "label": "Precision weighted"
+      }
+    ],
+    "threshold_curve": [
+      {
+        "threshold": 0.01,
+        "accuracy": 0.6042,
+        "balanced_accuracy": 0.7829,
+        "recall": 0.9828,
+        "precision": 0.1166,
+        "f1": 0.2084,
+        "alerts": 489,
+        "alert_rate": 0.447,
+        "missed": 1,
+        "confusion_matrix": [
+          [
+            604,
+            432
+          ],
+          [
+            1,
+            57
+          ]
+        ]
+      },
+      {
+        "threshold": 0.02,
+        "accuracy": 0.6115,
+        "balanced_accuracy": 0.7867,
+        "recall": 0.9828,
+        "precision": 0.1185,
+        "f1": 0.2115,
+        "alerts": 481,
+        "alert_rate": 0.4397,
+        "missed": 1,
+        "confusion_matrix": [
+          [
+            612,
+            424
+          ],
+          [
+            1,
+            57
+          ]
+        ]
+      },
+      {
+        "threshold": 0.03,
+        "accuracy": 0.7815,
+        "balanced_accuracy": 0.8684,
+        "recall": 0.9655,
+        "precision": 0.1911,
+        "f1": 0.3191,
+        "alerts": 293,
+        "alert_rate": 0.2678,
+        "missed": 2,
+        "confusion_matrix": [
+          [
+            799,
+            237
+          ],
+          [
+            2,
+            56
+          ]
+        ]
+      },
+      {
+        "threshold": 0.04,
+        "accuracy": 0.7815,
+        "balanced_accuracy": 0.8684,
+        "recall": 0.9655,
+        "precision": 0.1911,
+        "f1": 0.3191,
+        "alerts": 293,
+        "alert_rate": 0.2678,
+        "missed": 2,
+        "confusion_matrix": [
+          [
+            799,
+            237
+          ],
+          [
+            2,
+            56
+          ]
+        ]
+      },
+      {
+        "threshold": 0.05,
+        "accuracy": 0.8839,
+        "balanced_accuracy": 0.898,
+        "recall": 0.9138,
+        "precision": 0.3029,
+        "f1": 0.4549,
+        "alerts": 175,
+        "alert_rate": 0.16,
+        "missed": 5,
+        "confusion_matrix": [
+          [
+            914,
+            122
+          ],
+          [
+            5,
+            53
+          ]
+        ]
+      },
+      {
+        "threshold": 0.06,
+        "accuracy": 0.9068,
+        "balanced_accuracy": 0.9019,
+        "recall": 0.8966,
+        "precision": 0.3514,
+        "f1": 0.5049,
+        "alerts": 148,
+        "alert_rate": 0.1353,
+        "missed": 6,
+        "confusion_matrix": [
+          [
+            940,
+            96
+          ],
+          [
+            6,
+            52
+          ]
+        ]
+      },
+      {
+        "threshold": 0.07,
+        "accuracy": 0.9132,
+        "balanced_accuracy": 0.9053,
+        "recall": 0.8966,
+        "precision": 0.3688,
+        "f1": 0.5226,
+        "alerts": 141,
+        "alert_rate": 0.1289,
+        "missed": 6,
+        "confusion_matrix": [
+          [
+            947,
+            89
+          ],
+          [
+            6,
+            52
+          ]
+        ]
+      },
+      {
+        "threshold": 0.08,
+        "accuracy": 0.9132,
+        "balanced_accuracy": 0.9053,
+        "recall": 0.8966,
+        "precision": 0.3688,
+        "f1": 0.5226,
+        "alerts": 141,
+        "alert_rate": 0.1289,
+        "missed": 6,
+        "confusion_matrix": [
+          [
+            947,
+            89
+          ],
+          [
+            6,
+            52
+          ]
+        ]
+      },
+      {
+        "threshold": 0.09,
+        "accuracy": 0.9132,
+        "balanced_accuracy": 0.9053,
+        "recall": 0.8966,
+        "precision": 0.3688,
+        "f1": 0.5226,
+        "alerts": 141,
+        "alert_rate": 0.1289,
+        "missed": 6,
+        "confusion_matrix": [
+          [
+            947,
+            89
+          ],
+          [
+            6,
+            52
+          ]
+        ]
+      },
+      {
+        "threshold": 0.1,
+        "accuracy": 0.9159,
+        "balanced_accuracy": 0.9068,
+        "recall": 0.8966,
+        "precision": 0.3768,
+        "f1": 0.5306,
+        "alerts": 138,
+        "alert_rate": 0.1261,
+        "missed": 6,
+        "confusion_matrix": [
+          [
+            950,
+            86
+          ],
+          [
+            6,
+            52
+          ]
+        ]
+      },
+      {
+        "threshold": 0.11,
+        "accuracy": 0.9241,
+        "balanced_accuracy": 0.8948,
+        "recall": 0.8621,
+        "precision": 0.4,
+        "f1": 0.5464,
+        "alerts": 125,
+        "alert_rate": 0.1143,
+        "missed": 8,
+        "confusion_matrix": [
+          [
+            961,
+            75
+          ],
+          [
+            8,
+            50
+          ]
+        ]
+      },
+      {
+        "threshold": 0.12,
+        "accuracy": 0.9342,
+        "balanced_accuracy": 0.892,
+        "recall": 0.8448,
+        "precision": 0.4375,
+        "f1": 0.5765,
+        "alerts": 112,
+        "alert_rate": 0.1024,
+        "missed": 9,
+        "confusion_matrix": [
+          [
+            973,
+            63
+          ],
+          [
+            9,
+            49
+          ]
+        ]
+      },
+      {
+        "threshold": 0.13,
+        "accuracy": 0.9342,
+        "balanced_accuracy": 0.892,
+        "recall": 0.8448,
+        "precision": 0.4375,
+        "f1": 0.5765,
+        "alerts": 112,
+        "alert_rate": 0.1024,
+        "missed": 9,
+        "confusion_matrix": [
+          [
+            973,
+            63
+          ],
+          [
+            9,
+            49
+          ]
+        ]
+      },
+      {
+        "threshold": 0.14,
+        "accuracy": 0.9342,
+        "balanced_accuracy": 0.892,
+        "recall": 0.8448,
+        "precision": 0.4375,
+        "f1": 0.5765,
+        "alerts": 112,
+        "alert_rate": 0.1024,
+        "missed": 9,
+        "confusion_matrix": [
+          [
+            973,
+            63
+          ],
+          [
+            9,
+            49
+          ]
+        ]
+      },
+      {
+        "threshold": 0.15,
+        "accuracy": 0.9342,
+        "balanced_accuracy": 0.892,
+        "recall": 0.8448,
+        "precision": 0.4375,
+        "f1": 0.5765,
+        "alerts": 112,
+        "alert_rate": 0.1024,
+        "missed": 9,
+        "confusion_matrix": [
+          [
+            973,
+            63
+          ],
+          [
+            9,
+            49
+          ]
+        ]
+      },
+      {
+        "threshold": 0.16,
+        "accuracy": 0.9342,
+        "balanced_accuracy": 0.892,
+        "recall": 0.8448,
+        "precision": 0.4375,
+        "f1": 0.5765,
+        "alerts": 112,
+        "alert_rate": 0.1024,
+        "missed": 9,
+        "confusion_matrix": [
+          [
+            973,
+            63
+          ],
+          [
+            9,
+            49
+          ]
+        ]
+      },
+      {
+        "threshold": 0.17,
+        "accuracy": 0.9351,
+        "balanced_accuracy": 0.8925,
+        "recall": 0.8448,
+        "precision": 0.4414,
+        "f1": 0.5799,
+        "alerts": 111,
+        "alert_rate": 0.1015,
+        "missed": 9,
+        "confusion_matrix": [
+          [
+            974,
+            62
+          ],
+          [
+            9,
+            49
+          ]
+        ]
+      },
+      {
+        "threshold": 0.18,
+        "accuracy": 0.9388,
+        "balanced_accuracy": 0.8944,
+        "recall": 0.8448,
+        "precision": 0.4579,
+        "f1": 0.5939,
+        "alerts": 107,
+        "alert_rate": 0.0978,
+        "missed": 9,
+        "confusion_matrix": [
+          [
+            978,
+            58
+          ],
+          [
+            9,
+            49
+          ]
+        ]
+      },
+      {
+        "threshold": 0.19,
+        "accuracy": 0.9516,
+        "balanced_accuracy": 0.8605,
+        "recall": 0.7586,
+        "precision": 0.5301,
+        "f1": 0.6241,
+        "alerts": 83,
+        "alert_rate": 0.0759,
+        "missed": 14,
+        "confusion_matrix": [
+          [
+            997,
+            39
+          ],
+          [
+            14,
+            44
+          ]
+        ]
+      },
+      {
+        "threshold": 0.2,
+        "accuracy": 0.9506,
+        "balanced_accuracy": 0.8519,
+        "recall": 0.7414,
+        "precision": 0.5244,
+        "f1": 0.6143,
+        "alerts": 82,
+        "alert_rate": 0.075,
+        "missed": 15,
+        "confusion_matrix": [
+          [
+            997,
+            39
+          ],
+          [
+            15,
+            43
+          ]
+        ]
+      },
+      {
+        "threshold": 0.21,
+        "accuracy": 0.9506,
+        "balanced_accuracy": 0.8519,
+        "recall": 0.7414,
+        "precision": 0.5244,
+        "f1": 0.6143,
+        "alerts": 82,
+        "alert_rate": 0.075,
+        "missed": 15,
+        "confusion_matrix": [
+          [
+            997,
+            39
+          ],
+          [
+            15,
+            43
+          ]
+        ]
+      },
+      {
+        "threshold": 0.22,
+        "accuracy": 0.9516,
+        "balanced_accuracy": 0.8523,
+        "recall": 0.7414,
+        "precision": 0.5309,
+        "f1": 0.6187,
+        "alerts": 81,
+        "alert_rate": 0.074,
+        "missed": 15,
+        "confusion_matrix": [
+          [
+            998,
+            38
+          ],
+          [
+            15,
+            43
+          ]
+        ]
+      },
+      {
+        "threshold": 0.23,
+        "accuracy": 0.9506,
+        "balanced_accuracy": 0.8437,
+        "recall": 0.7241,
+        "precision": 0.525,
+        "f1": 0.6087,
+        "alerts": 80,
+        "alert_rate": 0.0731,
+        "missed": 16,
+        "confusion_matrix": [
+          [
+            998,
+            38
+          ],
+          [
+            16,
+            42
+          ]
+        ]
+      },
+      {
+        "threshold": 0.24,
+        "accuracy": 0.9534,
+        "balanced_accuracy": 0.837,
+        "recall": 0.7069,
+        "precision": 0.5467,
+        "f1": 0.6165,
+        "alerts": 75,
+        "alert_rate": 0.0686,
+        "missed": 17,
+        "confusion_matrix": [
+          [
+            1002,
+            34
+          ],
+          [
+            17,
+            41
+          ]
+        ]
+      },
+      {
+        "threshold": 0.25,
+        "accuracy": 0.9543,
+        "balanced_accuracy": 0.8294,
+        "recall": 0.6897,
+        "precision": 0.5556,
+        "f1": 0.6154,
+        "alerts": 72,
+        "alert_rate": 0.0658,
+        "missed": 18,
+        "confusion_matrix": [
+          [
+            1004,
+            32
+          ],
+          [
+            18,
+            40
+          ]
+        ]
+      },
+      {
+        "threshold": 0.26,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.8323,
+        "recall": 0.6897,
+        "precision": 0.6061,
+        "f1": 0.6452,
+        "alerts": 66,
+        "alert_rate": 0.0603,
+        "missed": 18,
+        "confusion_matrix": [
+          [
+            1010,
+            26
+          ],
+          [
+            18,
+            40
+          ]
+        ]
+      },
+      {
+        "threshold": 0.27,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.8328,
+        "recall": 0.6897,
+        "precision": 0.6154,
+        "f1": 0.6504,
+        "alerts": 65,
+        "alert_rate": 0.0594,
+        "missed": 18,
+        "confusion_matrix": [
+          [
+            1011,
+            25
+          ],
+          [
+            18,
+            40
+          ]
+        ]
+      },
+      {
+        "threshold": 0.28,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.8328,
+        "recall": 0.6897,
+        "precision": 0.6154,
+        "f1": 0.6504,
+        "alerts": 65,
+        "alert_rate": 0.0594,
+        "missed": 18,
+        "confusion_matrix": [
+          [
+            1011,
+            25
+          ],
+          [
+            18,
+            40
+          ]
+        ]
+      },
+      {
+        "threshold": 0.29,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.8241,
+        "recall": 0.6724,
+        "precision": 0.6094,
+        "f1": 0.6393,
+        "alerts": 64,
+        "alert_rate": 0.0585,
+        "missed": 19,
+        "confusion_matrix": [
+          [
+            1011,
+            25
+          ],
+          [
+            19,
+            39
+          ]
+        ]
+      },
+      {
+        "threshold": 0.3,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.8246,
+        "recall": 0.6724,
+        "precision": 0.619,
+        "f1": 0.6446,
+        "alerts": 63,
+        "alert_rate": 0.0576,
+        "missed": 19,
+        "confusion_matrix": [
+          [
+            1012,
+            24
+          ],
+          [
+            19,
+            39
+          ]
+        ]
+      },
+      {
+        "threshold": 0.31,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.8165,
+        "recall": 0.6552,
+        "precision": 0.623,
+        "f1": 0.6387,
+        "alerts": 61,
+        "alert_rate": 0.0558,
+        "missed": 20,
+        "confusion_matrix": [
+          [
+            1013,
+            23
+          ],
+          [
+            20,
+            38
+          ]
+        ]
+      },
+      {
+        "threshold": 0.32,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.7997,
+        "recall": 0.6207,
+        "precision": 0.6207,
+        "f1": 0.6207,
+        "alerts": 58,
+        "alert_rate": 0.053,
+        "missed": 22,
+        "confusion_matrix": [
+          [
+            1014,
+            22
+          ],
+          [
+            22,
+            36
+          ]
+        ]
+      },
+      {
+        "threshold": 0.33,
+        "accuracy": 0.9625,
+        "balanced_accuracy": 0.793,
+        "recall": 0.6034,
+        "precision": 0.6604,
+        "f1": 0.6306,
+        "alerts": 53,
+        "alert_rate": 0.0484,
+        "missed": 23,
+        "confusion_matrix": [
+          [
+            1018,
+            18
+          ],
+          [
+            23,
+            35
+          ]
+        ]
+      },
+      {
+        "threshold": 0.34,
+        "accuracy": 0.9625,
+        "balanced_accuracy": 0.7523,
+        "recall": 0.5172,
+        "precision": 0.6977,
+        "f1": 0.5941,
+        "alerts": 43,
+        "alert_rate": 0.0393,
+        "missed": 28,
+        "confusion_matrix": [
+          [
+            1023,
+            13
+          ],
+          [
+            28,
+            30
+          ]
+        ]
+      },
+      {
+        "threshold": 0.35,
+        "accuracy": 0.9625,
+        "balanced_accuracy": 0.7361,
+        "recall": 0.4828,
+        "precision": 0.7179,
+        "f1": 0.5773,
+        "alerts": 39,
+        "alert_rate": 0.0356,
+        "missed": 30,
+        "confusion_matrix": [
+          [
+            1025,
+            11
+          ],
+          [
+            30,
+            28
+          ]
+        ]
+      },
+      {
+        "threshold": 0.36,
+        "accuracy": 0.9625,
+        "balanced_accuracy": 0.7361,
+        "recall": 0.4828,
+        "precision": 0.7179,
+        "f1": 0.5773,
+        "alerts": 39,
+        "alert_rate": 0.0356,
+        "missed": 30,
+        "confusion_matrix": [
+          [
+            1025,
+            11
+          ],
+          [
+            30,
+            28
+          ]
+        ]
+      },
+      {
+        "threshold": 0.37,
+        "accuracy": 0.9625,
+        "balanced_accuracy": 0.7361,
+        "recall": 0.4828,
+        "precision": 0.7179,
+        "f1": 0.5773,
+        "alerts": 39,
+        "alert_rate": 0.0356,
+        "missed": 30,
+        "confusion_matrix": [
+          [
+            1025,
+            11
+          ],
+          [
+            30,
+            28
+          ]
+        ]
+      },
+      {
+        "threshold": 0.38,
+        "accuracy": 0.9625,
+        "balanced_accuracy": 0.7361,
+        "recall": 0.4828,
+        "precision": 0.7179,
+        "f1": 0.5773,
+        "alerts": 39,
+        "alert_rate": 0.0356,
+        "missed": 30,
+        "confusion_matrix": [
+          [
+            1025,
+            11
+          ],
+          [
+            30,
+            28
+          ]
+        ]
+      },
+      {
+        "threshold": 0.39,
+        "accuracy": 0.9616,
+        "balanced_accuracy": 0.7274,
+        "recall": 0.4655,
+        "precision": 0.7105,
+        "f1": 0.5625,
+        "alerts": 38,
+        "alert_rate": 0.0347,
+        "missed": 31,
+        "confusion_matrix": [
+          [
+            1025,
+            11
+          ],
+          [
+            31,
+            27
+          ]
+        ]
+      },
+      {
+        "threshold": 0.4,
+        "accuracy": 0.9616,
+        "balanced_accuracy": 0.7274,
+        "recall": 0.4655,
+        "precision": 0.7105,
+        "f1": 0.5625,
+        "alerts": 38,
+        "alert_rate": 0.0347,
+        "missed": 31,
+        "confusion_matrix": [
+          [
+            1025,
+            11
+          ],
+          [
+            31,
+            27
+          ]
+        ]
+      },
+      {
+        "threshold": 0.41,
+        "accuracy": 0.9616,
+        "balanced_accuracy": 0.7274,
+        "recall": 0.4655,
+        "precision": 0.7105,
+        "f1": 0.5625,
+        "alerts": 38,
+        "alert_rate": 0.0347,
+        "missed": 31,
+        "confusion_matrix": [
+          [
+            1025,
+            11
+          ],
+          [
+            31,
+            27
+          ]
+        ]
+      },
+      {
+        "threshold": 0.42,
+        "accuracy": 0.9625,
+        "balanced_accuracy": 0.7279,
+        "recall": 0.4655,
+        "precision": 0.7297,
+        "f1": 0.5684,
+        "alerts": 37,
+        "alert_rate": 0.0338,
+        "missed": 31,
+        "confusion_matrix": [
+          [
+            1026,
+            10
+          ],
+          [
+            31,
+            27
+          ]
+        ]
+      },
+      {
+        "threshold": 0.43,
+        "accuracy": 0.9634,
+        "balanced_accuracy": 0.7284,
+        "recall": 0.4655,
+        "precision": 0.75,
+        "f1": 0.5745,
+        "alerts": 36,
+        "alert_rate": 0.0329,
+        "missed": 31,
+        "confusion_matrix": [
+          [
+            1027,
+            9
+          ],
+          [
+            31,
+            27
+          ]
+        ]
+      },
+      {
+        "threshold": 0.44,
+        "accuracy": 0.9625,
+        "balanced_accuracy": 0.7198,
+        "recall": 0.4483,
+        "precision": 0.7429,
+        "f1": 0.5591,
+        "alerts": 35,
+        "alert_rate": 0.032,
+        "missed": 32,
+        "confusion_matrix": [
+          [
+            1027,
+            9
+          ],
+          [
+            32,
+            26
+          ]
+        ]
+      },
+      {
+        "threshold": 0.45,
+        "accuracy": 0.9616,
+        "balanced_accuracy": 0.6705,
+        "recall": 0.3448,
+        "precision": 0.8333,
+        "f1": 0.4878,
+        "alerts": 24,
+        "alert_rate": 0.0219,
+        "missed": 38,
+        "confusion_matrix": [
+          [
+            1032,
+            4
+          ],
+          [
+            38,
+            20
+          ]
+        ]
+      },
+      {
+        "threshold": 0.46,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.6619,
+        "recall": 0.3276,
+        "precision": 0.8261,
+        "f1": 0.4691,
+        "alerts": 23,
+        "alert_rate": 0.021,
+        "missed": 39,
+        "confusion_matrix": [
+          [
+            1032,
+            4
+          ],
+          [
+            39,
+            19
+          ]
+        ]
+      },
+      {
+        "threshold": 0.47,
+        "accuracy": 0.9616,
+        "balanced_accuracy": 0.6623,
+        "recall": 0.3276,
+        "precision": 0.8636,
+        "f1": 0.475,
+        "alerts": 22,
+        "alert_rate": 0.0201,
+        "missed": 39,
+        "confusion_matrix": [
+          [
+            1033,
+            3
+          ],
+          [
+            39,
+            19
+          ]
+        ]
+      },
+      {
+        "threshold": 0.48,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.6537,
+        "recall": 0.3103,
+        "precision": 0.8571,
+        "f1": 0.4557,
+        "alerts": 21,
+        "alert_rate": 0.0192,
+        "missed": 40,
+        "confusion_matrix": [
+          [
+            1033,
+            3
+          ],
+          [
+            40,
+            18
+          ]
+        ]
+      },
+      {
+        "threshold": 0.49,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.6537,
+        "recall": 0.3103,
+        "precision": 0.8571,
+        "f1": 0.4557,
+        "alerts": 21,
+        "alert_rate": 0.0192,
+        "missed": 40,
+        "confusion_matrix": [
+          [
+            1033,
+            3
+          ],
+          [
+            40,
+            18
+          ]
+        ]
+      },
+      {
+        "threshold": 0.5,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.6537,
+        "recall": 0.3103,
+        "precision": 0.8571,
+        "f1": 0.4557,
+        "alerts": 21,
+        "alert_rate": 0.0192,
+        "missed": 40,
+        "confusion_matrix": [
+          [
+            1033,
+            3
+          ],
+          [
+            40,
+            18
+          ]
+        ]
+      },
+      {
+        "threshold": 0.51,
+        "accuracy": 0.9616,
+        "balanced_accuracy": 0.6542,
+        "recall": 0.3103,
+        "precision": 0.9,
+        "f1": 0.4615,
+        "alerts": 20,
+        "alert_rate": 0.0183,
+        "missed": 40,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            40,
+            18
+          ]
+        ]
+      },
+      {
+        "threshold": 0.52,
+        "accuracy": 0.9607,
+        "balanced_accuracy": 0.6456,
+        "recall": 0.2931,
+        "precision": 0.8947,
+        "f1": 0.4416,
+        "alerts": 19,
+        "alert_rate": 0.0174,
+        "missed": 41,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            41,
+            17
+          ]
+        ]
+      },
+      {
+        "threshold": 0.53,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.637,
+        "recall": 0.2759,
+        "precision": 0.8889,
+        "f1": 0.4211,
+        "alerts": 18,
+        "alert_rate": 0.0165,
+        "missed": 42,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            42,
+            16
+          ]
+        ]
+      },
+      {
+        "threshold": 0.54,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.637,
+        "recall": 0.2759,
+        "precision": 0.8889,
+        "f1": 0.4211,
+        "alerts": 18,
+        "alert_rate": 0.0165,
+        "missed": 42,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            42,
+            16
+          ]
+        ]
+      },
+      {
+        "threshold": 0.55,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.637,
+        "recall": 0.2759,
+        "precision": 0.8889,
+        "f1": 0.4211,
+        "alerts": 18,
+        "alert_rate": 0.0165,
+        "missed": 42,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            42,
+            16
+          ]
+        ]
+      },
+      {
+        "threshold": 0.56,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.637,
+        "recall": 0.2759,
+        "precision": 0.8889,
+        "f1": 0.4211,
+        "alerts": 18,
+        "alert_rate": 0.0165,
+        "missed": 42,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            42,
+            16
+          ]
+        ]
+      },
+      {
+        "threshold": 0.57,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.637,
+        "recall": 0.2759,
+        "precision": 0.8889,
+        "f1": 0.4211,
+        "alerts": 18,
+        "alert_rate": 0.0165,
+        "missed": 42,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            42,
+            16
+          ]
+        ]
+      },
+      {
+        "threshold": 0.58,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.637,
+        "recall": 0.2759,
+        "precision": 0.8889,
+        "f1": 0.4211,
+        "alerts": 18,
+        "alert_rate": 0.0165,
+        "missed": 42,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            42,
+            16
+          ]
+        ]
+      },
+      {
+        "threshold": 0.59,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.637,
+        "recall": 0.2759,
+        "precision": 0.8889,
+        "f1": 0.4211,
+        "alerts": 18,
+        "alert_rate": 0.0165,
+        "missed": 42,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            42,
+            16
+          ]
+        ]
+      },
+      {
+        "threshold": 0.6,
+        "accuracy": 0.9598,
+        "balanced_accuracy": 0.637,
+        "recall": 0.2759,
+        "precision": 0.8889,
+        "f1": 0.4211,
+        "alerts": 18,
+        "alert_rate": 0.0165,
+        "missed": 42,
+        "confusion_matrix": [
+          [
+            1034,
+            2
+          ],
+          [
+            42,
+            16
+          ]
+        ]
+      }
+    ],
+    "deciles": [
+      {
+        "decile": 1,
+        "n": 110,
+        "defaults": 49,
+        "default_rate": 0.4455,
+        "lift": 8.4,
+        "cum_capture": 0.8448,
+        "min_pd": 0.1742,
+        "max_pd": 0.99,
+        "exposure": 1100692550.0
+      },
+      {
+        "decile": 2,
+        "n": 109,
+        "defaults": 5,
+        "default_rate": 0.0459,
+        "lift": 0.87,
+        "cum_capture": 0.931,
+        "min_pd": 0.0471,
+        "max_pd": 0.1704,
+        "exposure": 837301390.0
+      },
+      {
+        "decile": 3,
+        "n": 110,
+        "defaults": 2,
+        "default_rate": 0.0182,
+        "lift": 0.34,
+        "cum_capture": 0.9655,
+        "min_pd": 0.0244,
+        "max_pd": 0.0471,
+        "exposure": 890240700.0
+      },
+      {
+        "decile": 4,
+        "n": 109,
+        "defaults": 1,
+        "default_rate": 0.0092,
+        "lift": 0.17,
+        "cum_capture": 0.9828,
+        "min_pd": 0.023,
+        "max_pd": 0.0244,
+        "exposure": 847233790.0
+      },
+      {
+        "decile": 5,
+        "n": 109,
+        "defaults": 1,
+        "default_rate": 0.0092,
+        "lift": 0.17,
+        "cum_capture": 1.0,
+        "min_pd": 0.0057,
+        "max_pd": 0.023,
+        "exposure": 779069340.0
+      },
+      {
+        "decile": 6,
+        "n": 110,
+        "defaults": 0,
+        "default_rate": 0.0,
+        "lift": 0.0,
+        "cum_capture": 1.0,
+        "min_pd": 0.0025,
+        "max_pd": 0.0057,
+        "exposure": 811032760.0
+      },
+      {
+        "decile": 7,
+        "n": 109,
+        "defaults": 0,
+        "default_rate": 0.0,
+        "lift": 0.0,
+        "cum_capture": 1.0,
+        "min_pd": 0.0007,
+        "max_pd": 0.0025,
+        "exposure": 676629170.0
+      },
+      {
+        "decile": 8,
+        "n": 110,
+        "defaults": 0,
+        "default_rate": 0.0,
+        "lift": 0.0,
+        "cum_capture": 1.0,
+        "min_pd": 0.0005,
+        "max_pd": 0.0007,
+        "exposure": 529740580.0
+      },
+      {
+        "decile": 9,
+        "n": 109,
+        "defaults": 0,
+        "default_rate": 0.0,
+        "lift": 0.0,
+        "cum_capture": 1.0,
+        "min_pd": 0.0005,
+        "max_pd": 0.0005,
+        "exposure": 599683010.0
+      },
+      {
+        "decile": 10,
+        "n": 109,
+        "defaults": 0,
+        "default_rate": 0.0,
+        "lift": 0.0,
+        "cum_capture": 1.0,
+        "min_pd": 0.0005,
+        "max_pd": 0.0005,
+        "exposure": 782613950.0
+      }
+    ],
+    "lead_time": [
+      {
+        "months_ahead": "1-3",
+        "n": 24,
+        "flagged": 1.0
+      },
+      {
+        "months_ahead": "4-6",
+        "n": 16,
+        "flagged": 0.875
+      },
+      {
+        "months_ahead": "7-9",
+        "n": 11,
+        "flagged": 0.9091
+      },
+      {
+        "months_ahead": "10-12",
+        "n": 7,
+        "flagged": 0.7143
+      }
+    ],
+    "lead_time_threshold": 0.048,
+    "calibration": {
+      "bins": [
+        {
+          "bin": "0.00-0.02",
+          "n": 613,
+          "mean_predicted": 0.0022,
+          "observed": 0.0016
+        },
+        {
+          "bin": "0.02-0.05",
+          "n": 306,
+          "mean_predicted": 0.032,
+          "observed": 0.0131
+        },
+        {
+          "bin": "0.05-0.10",
+          "n": 37,
+          "mean_predicted": 0.06,
+          "observed": 0.027
+        },
+        {
+          "bin": "0.10-0.20",
+          "n": 56,
+          "mean_predicted": 0.1489,
+          "observed": 0.1607
+        },
+        {
+          "bin": "0.20-0.40",
+          "n": 44,
+          "mean_predicted": 0.2955,
+          "observed": 0.3636
+        },
+        {
+          "bin": "0.40-0.60",
+          "n": 20,
+          "mean_predicted": 0.4523,
+          "observed": 0.55
+        },
+        {
+          "bin": "0.60-1.00",
+          "n": 18,
+          "mean_predicted": 0.9355,
+          "observed": 0.8889
+        }
+      ],
+      "brier": 0.0277,
+      "expected_calibration_error": 0.0126
+    },
+    "calibration_method": "isotonic + per-loan-type Platt",
+    "segments": [
+      {
+        "segment": "loan_type",
+        "value": "CC",
+        "n": 532,
+        "defaults": 25,
+        "default_rate": 0.047,
+        "auc": 0.966,
+        "recall": 0.96,
+        "precision": 0.3117,
+        "alert_rate": 0.1447
+      },
+      {
+        "segment": "loan_type",
+        "value": "OD",
+        "n": 295,
+        "defaults": 16,
+        "default_rate": 0.0542,
+        "auc": 0.9606,
+        "recall": 0.9375,
+        "precision": 0.2885,
+        "alert_rate": 0.1763
+      },
+      {
+        "segment": "loan_type",
+        "value": "term",
+        "n": 267,
+        "defaults": 17,
+        "default_rate": 0.0637,
+        "auc": 0.9571,
+        "recall": 0.8235,
+        "precision": 0.5385,
+        "alert_rate": 0.0974
+      },
+      {
+        "segment": "sector",
+        "value": "food_processing",
+        "n": 174,
+        "defaults": 14,
+        "default_rate": 0.0805,
+        "auc": 0.9871,
+        "recall": 1.0,
+        "precision": 0.4375,
+        "alert_rate": 0.1839
+      },
+      {
+        "segment": "sector",
+        "value": "logistics",
+        "n": 174,
+        "defaults": 5,
+        "default_rate": 0.0287,
+        "auc": 0.9988,
+        "recall": 1.0,
+        "precision": 0.2174,
+        "alert_rate": 0.1322
+      },
+      {
+        "segment": "sector",
+        "value": "manufacturing",
+        "n": 312,
+        "defaults": 12,
+        "default_rate": 0.0385,
+        "auc": 0.9287,
+        "recall": 0.75,
+        "precision": 0.2571,
+        "alert_rate": 0.1122
+      },
+      {
+        "segment": "sector",
+        "value": "services",
+        "n": 149,
+        "defaults": 7,
+        "default_rate": 0.047,
+        "auc": 1.0,
+        "recall": 1.0,
+        "precision": 0.4118,
+        "alert_rate": 0.1141
+      },
+      {
+        "segment": "sector",
+        "value": "trading",
+        "n": 285,
+        "defaults": 20,
+        "default_rate": 0.0702,
+        "auc": 0.9327,
+        "recall": 0.9,
+        "precision": 0.375,
+        "alert_rate": 0.1684
+      },
+      {
+        "segment": "vintage",
+        "value": "0-3y",
+        "n": 144,
+        "defaults": 6,
+        "default_rate": 0.0417,
+        "auc": 0.9988,
+        "recall": 1.0,
+        "precision": 0.4286,
+        "alert_rate": 0.0972
+      },
+      {
+        "segment": "vintage",
+        "value": "15y+",
+        "n": 86,
+        "defaults": 4,
+        "default_rate": 0.0465,
+        "auc": 0.8796,
+        "recall": 0.25,
+        "precision": 0.1667,
+        "alert_rate": 0.0698
+      },
+      {
+        "segment": "vintage",
+        "value": "4-7y",
+        "n": 284,
+        "defaults": 20,
+        "default_rate": 0.0704,
+        "auc": 0.9756,
+        "recall": 1.0,
+        "precision": 0.3571,
+        "alert_rate": 0.1972
+      },
+      {
+        "segment": "vintage",
+        "value": "8-15y",
+        "n": 580,
+        "defaults": 28,
+        "default_rate": 0.0483,
+        "auc": 0.9655,
+        "recall": 0.9286,
+        "precision": 0.3291,
+        "alert_rate": 0.1362
+      },
+      {
+        "segment": "as_of_month",
+        "value": "15",
+        "n": 549,
+        "defaults": 35,
+        "default_rate": 0.0638,
+        "auc": 0.95,
+        "recall": 0.8857,
+        "precision": 0.3647,
+        "alert_rate": 0.1548
+      },
+      {
+        "segment": "as_of_month",
+        "value": "18",
+        "n": 545,
+        "defaults": 23,
+        "default_rate": 0.0422,
+        "auc": 0.9776,
+        "recall": 0.9565,
+        "precision": 0.3143,
+        "alert_rate": 0.1284
+      }
+    ],
+    "baselines": [
+      {
+        "name": "Arrears rule",
+        "description": "30+ DPD or a missed EMI in the trailing 6 months",
+        "recall": 0.3276,
+        "precision": 1.0,
+        "alerts": 19,
+        "alert_rate": 0.0174,
+        "prahari_recall_at_same_alerts": 0.2931,
+        "prahari_precision_at_same_alerts": 0.8947,
+        "uplift_x": 0.89
+      },
+      {
+        "name": "Arrears or utilisation rule",
+        "description": "Arrears rule, or limit utilisation at 90% or more",
+        "recall": 0.6552,
+        "precision": 0.3725,
+        "alerts": 102,
+        "alert_rate": 0.0932,
+        "prahari_recall_at_same_alerts": 0.8448,
+        "prahari_precision_at_same_alerts": 0.4804,
+        "uplift_x": 1.29
+      },
+      {
+        "name": "Logistic regression",
+        "description": "L2 logistic regression on the same features",
+        "auc": 0.8073,
+        "recall": 0.6897,
+        "precision": 0.2439,
+        "alerts": 164,
+        "alert_rate": 0.1499,
+        "prahari_recall_at_same_alerts": 0.9138,
+        "prahari_precision_at_same_alerts": 0.3232,
+        "uplift_x": 1.33
+      }
+    ],
+    "ablation": {
+      "external_features_removed": [
+        "gst_delay_mean",
+        "gst_delay_max",
+        "gst_delay_slope",
+        "epfo_delay_max",
+        "electricity_slope",
+        "epfo_emp_slope",
+        "sentiment_last"
+      ],
+      "n_internal_features": 54,
+      "full_model_auc": 0.9615,
+      "internal_only_auc": 0.9605,
+      "full_model_recall_at_budget": 0.9138,
+      "internal_only_recall_at_budget": 0.9138,
+      "alert_budget": 155,
+      "note": "The internal-only model is trained and evaluated on the same folds using only the columns that IDBI's core-banking catalogue provides (conduct, drawing power, liens, statements, bureau, notes, contagion, profile). The gap to the full model is what the external GST, EPFO, electricity and sector feeds are worth."
+    },
+    "segment_models": [
+      {
+        "loan_type": "CC",
+        "n_train": 2299,
+        "n_valid": 532,
+        "defaults_valid": 25,
+        "global_model_auc": 0.966,
+        "dedicated_model_auc": 0.9503,
+        "verdict": "dedicated model is not better"
+      },
+      {
+        "loan_type": "OD",
+        "n_train": 1296,
+        "n_valid": 295,
+        "defaults_valid": 16,
+        "global_model_auc": 0.9606,
+        "dedicated_model_auc": 0.9303,
+        "verdict": "dedicated model is not better"
+      },
+      {
+        "loan_type": "term",
+        "n_train": 1422,
+        "n_valid": 267,
+        "defaults_valid": 17,
+        "global_model_auc": 0.9571,
+        "dedicated_model_auc": 0.9588,
+        "verdict": "dedicated model is not better"
+      }
+    ],
+    "psi_between_as_ofs": 0.0182,
+    "n_train": 5017,
+    "n_calibration": 1242,
+    "n_valid": 1094,
+    "n_borrowers_train": 1687,
+    "n_borrowers_valid": 559,
+    "train_positive_rate": 0.0421,
+    "valid_positive_rate": 0.053,
+    "validation": "borrower-disjoint + temporal: train fold A at as_of [6, 9, 12]; calibrate and choose thresholds on fold B at as_of [15, 18]; report fold C at as_of [15, 18] (borrowers never seen, dates after training). Deployed model = evaluated model, no refit.",
+    "horizon_months": 12,
+    "n_features": 61
+  },
+  "honesty_note": "Every number is computed on borrowers the model never saw, at as-of months after the training window (borrower-disjoint temporal validation), and the operating thresholds were chosen on a separate calibration fold. The deployed model is the evaluated model. The headline is reported at the operating point that meets the bank's stated 90 percent accuracy requirement; the maximum-capture point and the full threshold table are shown alongside so the bank can pick its own trade-off. Data is synthetic and cleaner than a real book, so these numbers are an upper bound on what the method would achieve on IDBI data; the method, not the number, is what transfers."
+}

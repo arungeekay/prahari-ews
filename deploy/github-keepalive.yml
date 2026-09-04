@@ -1,0 +1,26 @@
+name: keep-alive
+
+# Pings all three deployed health endpoints every 10 minutes so free-tier containers never sleep
+# during evaluation (BUILD_SPEC §8.3). Set the three repo/environment variables to your live URLs.
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping health endpoints
+        env:
+          PRAHARI_URL: ${{ vars.PRAHARI_URL }}
+          AROGYA_URL: ${{ vars.AROGYA_URL }}
+          DISHA_URL: ${{ vars.DISHA_URL }}
+        run: |
+          for url in "$PRAHARI_URL" "$AROGYA_URL" "$DISHA_URL"; do
+            if [ -n "$url" ]; then
+              echo "Pinging $url/api/health"
+              curl -fsS --max-time 30 "$url/api/health" || echo "  (no response - may be waking)"
+            fi
+          done
