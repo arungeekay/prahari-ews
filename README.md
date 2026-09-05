@@ -5,7 +5,7 @@
 ![PRAHARI](docs/screenshots/prahari-backtest.png)
 
 **Built for IDBI Innovate 2026 - Track 4: Default Prediction (Early Warning System).** Shortlisted to the top 24;
-this is the refined prototype. **Live demo: https://13-200-31-140.sslip.io**
+this is the refined prototype. **Live demo: https://13-200-31-140.sslip.io** · **Demo video (3 min): https://youtu.be/-5g_3NEayrs**
 
 Runs on **synthetic data we generate** (deterministic, `--seed 42`). Data enters the engine through
 one seam (`core/ingest`): the synthetic world by default, or `IDBISandboxSource`, an adapter built
